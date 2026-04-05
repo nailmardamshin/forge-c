@@ -553,6 +553,14 @@
             from { opacity: 0; transform: translateX(30px); }
             to { opacity: 1; transform: translateX(0); }
         }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(75, 199, 149, 0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(75, 199, 149, 0); }
+        }
+        .pulse-callout {
+            animation: pulse 2s ease-in-out 3;
+            animation-delay: 1s;
+        }
         @keyframes scaleIn {
             from { opacity: 0; transform: scale(0.9); }
             to { opacity: 1; transform: scale(1); }
@@ -890,8 +898,8 @@
                 <strong>Нестандартные случаи</strong> автоматически уходят на ручную обработку с предзаполненным черновиком — сотрудник не начинает с нуля даже в сложном кейсе.
             </div>
 
-            <div class="callout reveal" style="background: var(--green-light); border-left-color: var(--green-accent); margin-top: 16px;">
-                <strong>Параллельная обработка — деньги приходят быстрее.</strong> Сейчас счета стоят в очереди: 2 сотрудника обрабатывают их вручную по 30-40 минут. Клиент ждёт документы днями. После автоматизации — как только продажник ставит задачу, счёт и договор формируются и отправляются клиенту практически моментально. Нет очереди, нет ожидания — деньги поступают быстрее.
+            <div class="callout reveal pulse-callout" style="background: var(--green-light); border-left-color: var(--green-accent); margin-top: 16px;">
+                <strong>💰 Деньги приходят быстрее.</strong> Нет очереди из сотен документов — счёт уходит клиенту моментально, а не через дни ожидания.
             </div>
 
             <h3 class="reveal">Аналитика и контроль</h3>
