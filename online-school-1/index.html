@@ -462,6 +462,36 @@
             font-size: 14px;
         }
 
+        /* Race */
+        .race-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; align-items: stretch; }
+        .race-card { border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.07); position: relative; display: flex; flex-direction: column; }
+        .race-card--manual { background: #f8f5f5; }
+        .race-card--auto { background: var(--green-light); }
+        .race-header { padding: 20px 20px 16px; text-align: center; }
+        .race-header__label { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .race-header__time { font-size: 28px; font-weight: 700; line-height: 1.2; }
+        .race-steps { list-style: none; padding: 0 0 8px; flex: 1; }
+        .race-step { font-size: 13px; padding: 10px 14px; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 10px; transition: background 0.3s, box-shadow 0.3s; position: relative; }
+        .race-step:last-child { border-bottom: none; }
+        .race-step__num { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+        .race-step__text { flex: 1; line-height: 1.4; }
+        .race-badge { font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 4px; flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.3px; }
+        .race-badge--auto { background: #dff6d2; color: #2d8a5e; }
+        .race-badge--manual { background: #ede0f5; color: #520484; }
+        .race-step--active { box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.06); }
+        .race-card--manual .race-step--active { background: rgba(255,240,240,0.8); }
+        .race-card--auto .race-step--active { background: rgba(220,255,235,0.8); }
+        .race-step--done { opacity: 0.55; }
+        .race-finish { text-align: center; padding: 14px; font-weight: 700; font-size: 15px; min-height: 50px; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.4s; }
+        .race-finish--visible { opacity: 1; }
+        .race-btn { background: var(--purple-deep); color: #fff; border: none; padding: 14px 36px; font-size: 16px; font-weight: 600; border-radius: 12px; cursor: pointer; font-family: inherit; transition: background 0.2s, transform 0.15s; box-shadow: 0 4px 16px rgba(82,4,132,0.25); }
+        .race-btn:hover { background: #3f0366; transform: translateY(-1px); }
+        .race-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .race-doc { position: absolute; left: 12px; width: 18px; height: 22px; opacity: 0; transition: top 0.3s ease, opacity 0.3s; z-index: 2; pointer-events: none; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+        .race-doc--visible { opacity: 1; }
+        .race-result { text-align: center; font-size: 20px; font-weight: 700; color: #2d8a5e; opacity: 0; transform: translateY(8px); transition: opacity 0.5s, transform 0.5s; padding: 8px 0 16px; }
+        .race-result--visible { opacity: 1; transform: translateY(0); }
+
         /* Collapsible */
         .collapsible {
             margin: 20px 0;
@@ -661,6 +691,8 @@
             .hero-logo { font-size: 14px; margin-bottom: 20px; }
             .cta-btn-hero { padding: 14px 28px; font-size: 15px; }
             .cards { grid-template-columns: 1fr; }
+            .race-grid { grid-template-columns: 1fr; }
+            .race-btn { padding: 12px 28px; font-size: 15px; }
             .process-grid { grid-template-columns: 1fr; }
             .roi-grid { grid-template-columns: 1fr !important; }
             .price-details { grid-template-columns: 1fr !important; }
@@ -817,35 +849,42 @@
                 <strong style="color:#2d8a5e;">90% задач направления в сезон</strong> — ~1 620 из 1 800 задач в месяц. Самый крупный блок работы отдела. Освободившееся время сотрудников можно перераспределить на другие задачи вместо найма в сезон.
             </div>
 
-            <div class="process-grid reveal">
-                <div class="process-box process-before">
-                    <div class="label">Сейчас — всё делает человек</div>
-                    <div class="time">30-40 мин <span style="font-size:14px; font-weight:400;">на 1 задачу</span></div>
-                    <ol class="process-human">
-                        <li>Берёт задачу из Трекера</li>
-                        <li>Ищет клиента в Amo, открывает 1С</li>
-                        <li>Проверяет тариф и оплаты</li>
-                        <li>Заполняет шаблон руками</li>
-                        <li>Создаёт заказ и счёт в 1С</li>
-                        <li>Вносит данные в Amo и Google-таблицу</li>
-                        <li>Отправляет документы клиенту</li>
-                        <li>Обновляет статус в Трекере</li>
+            <!-- Гонка процессов -->
+            <div class="reveal" style="text-align:center; margin-bottom:16px;">
+                <button class="race-btn" id="raceBtn">Запустить оба процесса ▶</button>
+            </div>
+            <div class="race-grid">
+                <div class="race-card race-card--manual" id="cardManual">
+                    <svg class="race-doc" id="docManual" viewBox="0 0 18 22" fill="none"><rect x="0.5" y="0.5" width="17" height="21" rx="2" fill="white" stroke="#b84040"/><line x1="4" y1="6" x2="14" y2="6" stroke="#b84040" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="10" x2="14" y2="10" stroke="#e0c0c0" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="14" x2="10" y2="14" stroke="#e0c0c0" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    <div class="race-header"><div class="race-header__label" style="color:#9a4a4a;">Сейчас — всё делает человек</div><div class="race-header__time" style="color:#b84040;">30–40 мин</div></div>
+                    <ol class="race-steps" id="stepsManual">
+                        <li class="race-step"><span class="race-step__num" style="background:#e8dede;color:#8a5a5a;">1</span><span class="race-step__text">Берёт задачу из Трекера</span></li>
+                        <li class="race-step"><span class="race-step__num" style="background:#e8dede;color:#8a5a5a;">2</span><span class="race-step__text">Ищет клиента в Amo, открывает 1С</span></li>
+                        <li class="race-step"><span class="race-step__num" style="background:#e8dede;color:#8a5a5a;">3</span><span class="race-step__text">Проверяет тариф и оплаты</span></li>
+                        <li class="race-step"><span class="race-step__num" style="background:#e8dede;color:#8a5a5a;">4</span><span class="race-step__text">Заполняет шаблон руками</span></li>
+                        <li class="race-step"><span class="race-step__num" style="background:#e8dede;color:#8a5a5a;">5</span><span class="race-step__text">Создаёт заказ и счёт в 1С</span></li>
+                        <li class="race-step"><span class="race-step__num" style="background:#e8dede;color:#8a5a5a;">6</span><span class="race-step__text">Вносит данные в Amo и таблицу</span></li>
+                        <li class="race-step"><span class="race-step__num" style="background:#e8dede;color:#8a5a5a;">7</span><span class="race-step__text">Отправляет документы клиенту</span></li>
+                        <li class="race-step"><span class="race-step__num" style="background:#e8dede;color:#8a5a5a;">8</span><span class="race-step__text">Обновляет статус в Трекере</span></li>
                     </ol>
+                    <div class="race-finish" id="finishManual" style="color:#b84040;">Готово — 30–40 минут 😮‍💨</div>
                 </div>
-                <div class="process-box process-after">
-                    <div class="label">После автоматизации</div>
-                    <div class="time">2-3 мин <span style="font-size:14px; font-weight:400;">на 1 задачу</span></div>
-                    <ol class="process-auto">
-                        <li class="auto">Система получает задачу автоматически</li>
-                        <li class="auto">Подтягивает данные из Amo, 1С, прайс-листа</li>
-                        <li class="auto">Определяет тип договора</li>
-                        <li class="auto">Генерирует договор + счёт (PDF)</li>
-                        <li class="auto">Отправляет клиенту на почту</li>
-                        <li class="auto">Обновляет Amo, Google-таблицу и статус в Трекере</li>
-                        <li class="human">Сотрудник проверяет карточку и создаёт заказ в 1С</li>
+                <div class="race-card race-card--auto" id="cardAuto">
+                    <svg class="race-doc" id="docAuto" viewBox="0 0 18 22" fill="none"><rect x="0.5" y="0.5" width="17" height="21" rx="2" fill="white" stroke="#2d8a5e"/><line x1="4" y1="6" x2="14" y2="6" stroke="#2d8a5e" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="10" x2="14" y2="10" stroke="#b8eda4" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="14" x2="10" y2="14" stroke="#b8eda4" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    <div class="race-header"><div class="race-header__label" style="color:#2d8a5e;">После автоматизации</div><div class="race-header__time" style="color:#2d8a5e;">2–3 мин</div></div>
+                    <ol class="race-steps" id="stepsAuto">
+                        <li class="race-step"><span class="race-step__num" style="background:#d4f0e0;color:#2d7a4e;">1</span><span class="race-step__text">Получает задачу из Трекера</span><span class="race-badge race-badge--auto">auto</span></li>
+                        <li class="race-step"><span class="race-step__num" style="background:#d4f0e0;color:#2d7a4e;">2</span><span class="race-step__text">Подтягивает данные из Amo, 1С, прайс-листа</span><span class="race-badge race-badge--auto">auto</span></li>
+                        <li class="race-step"><span class="race-step__num" style="background:#d4f0e0;color:#2d7a4e;">3</span><span class="race-step__text">Определяет тип договора</span><span class="race-badge race-badge--auto">auto</span></li>
+                        <li class="race-step"><span class="race-step__num" style="background:#d4f0e0;color:#2d7a4e;">4</span><span class="race-step__text">Генерирует договор + счёт (PDF)</span><span class="race-badge race-badge--auto">auto</span></li>
+                        <li class="race-step"><span class="race-step__num" style="background:#d4f0e0;color:#2d7a4e;">5</span><span class="race-step__text">Отправляет клиенту на почту</span><span class="race-badge race-badge--auto">auto</span></li>
+                        <li class="race-step"><span class="race-step__num" style="background:#d4f0e0;color:#2d7a4e;">6</span><span class="race-step__text">Обновляет Amo, таблицу и Трекер</span><span class="race-badge race-badge--auto">auto</span></li>
+                        <li class="race-step"><span class="race-step__num" style="background:#ede0f5;color:#520484;">7</span><span class="race-step__text">Сотрудник проверяет карточку и создаёт заказ в 1С</span><span class="race-badge race-badge--manual">вручную</span></li>
                     </ol>
+                    <div class="race-finish" id="finishAuto" style="color:#2d8a5e;">✓ Готово за 2–3 минуты</div>
                 </div>
             </div>
+            <div class="race-result" id="raceResult">⚡ Ускорение в ~15 раз</div>
 
             <div class="callout reveal" style="margin-top: 16px;">
                 <strong>Нестандартные случаи</strong> автоматически уходят на ручную обработку с предзаполненным черновиком — сотрудник не начинает с нуля даже в сложном кейсе.
@@ -1124,6 +1163,66 @@
 
         // Smooth scroll
         document.documentElement.style.scrollBehavior = 'smooth';
+
+        // Process race
+        (function() {
+          const btn = document.getElementById('raceBtn');
+          if (!btn) return;
+          const docManual = document.getElementById('docManual');
+          const docAuto = document.getElementById('docAuto');
+          const stepsManual = document.querySelectorAll('#stepsManual .race-step');
+          const stepsAuto = document.querySelectorAll('#stepsAuto .race-step');
+          const finishManual = document.getElementById('finishManual');
+          const finishAuto = document.getElementById('finishAuto');
+          const result = document.getElementById('raceResult');
+          let running = false;
+
+          function resetAll() {
+            [stepsManual, stepsAuto].forEach(steps => steps.forEach(s => s.classList.remove('race-step--active', 'race-step--done')));
+            [docManual, docAuto].forEach(d => { d.classList.remove('race-doc--visible'); d.style.top = '0px'; });
+            finishManual.classList.remove('race-finish--visible');
+            finishAuto.classList.remove('race-finish--visible');
+            result.classList.remove('race-result--visible');
+          }
+
+          function getStepTop(step) {
+            const rect = step.getBoundingClientRect();
+            const parentRect = step.closest('.race-card').getBoundingClientRect();
+            return rect.top - parentRect.top + rect.height / 2 - 11;
+          }
+
+          function animateSteps(steps, doc, finish, delays) {
+            return new Promise(resolve => {
+              let i = 0;
+              doc.classList.add('race-doc--visible');
+              doc.style.top = getStepTop(steps[0]) + 'px';
+              function next() {
+                if (i > 0) { steps[i-1].classList.remove('race-step--active'); steps[i-1].classList.add('race-step--done'); }
+                if (i >= steps.length) { doc.classList.remove('race-doc--visible'); finish.classList.add('race-finish--visible'); resolve(); return; }
+                steps[i].classList.add('race-step--active');
+                doc.style.top = getStepTop(steps[i]) + 'px';
+                const delay = Array.isArray(delays) ? delays[i] : delays;
+                i++;
+                setTimeout(next, delay);
+              }
+              next();
+            });
+          }
+
+          async function runRace() {
+            if (running) return;
+            running = true; btn.disabled = true; btn.textContent = 'Идёт гонка…';
+            resetAll();
+            const autoDelays = [150, 150, 150, 150, 150, 150, 1500];
+            await Promise.all([
+              animateSteps(stepsAuto, docAuto, finishAuto, autoDelays),
+              animateSteps(stepsManual, docManual, finishManual, 1500)
+            ]);
+            setTimeout(() => { result.classList.add('race-result--visible'); btn.textContent = 'Запустить снова ↻'; btn.disabled = false; running = false; }, 400);
+          }
+
+          btn.addEventListener('click', runRace);
+        })();
     </script>
 </body>
 </html>
