@@ -686,7 +686,21 @@
 
         /* Table scroll on small screens */
         @media (max-width: 500px) {
-            table { display: block; overflow-x: auto; white-space: nowrap; }
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: normal;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: thin;
+                scrollbar-color: var(--purple-deep) var(--border);
+            }
+            table::-webkit-scrollbar { height: 6px; }
+            table::-webkit-scrollbar-track { background: var(--border); border-radius: 3px; }
+            table::-webkit-scrollbar-thumb { background: var(--purple-deep); border-radius: 3px; }
+        }
+        @media (max-width: 640px) {
+            table { font-size: 13px; }
+            th, td { padding: 8px 10px; }
         }
     </style>
 </head>
