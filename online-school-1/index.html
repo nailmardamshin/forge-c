@@ -553,12 +553,13 @@
             from { opacity: 0; transform: translateX(30px); }
             to { opacity: 1; transform: translateX(0); }
         }
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(75, 199, 149, 0.4); }
-            50% { box-shadow: 0 0 0 8px rgba(75, 199, 149, 0); }
+        @keyframes nudge {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(4px); }
+            75% { transform: translateX(-4px); }
         }
         .pulse-callout {
-            animation: pulse 2s ease-in-out 3;
+            animation: nudge 0.4s ease-in-out 3;
             animation-delay: 1s;
         }
         @keyframes scaleIn {
@@ -898,8 +899,8 @@
                 <strong>Нестандартные случаи</strong> автоматически уходят на ручную обработку с предзаполненным черновиком — сотрудник не начинает с нуля даже в сложном кейсе.
             </div>
 
-            <div class="callout reveal pulse-callout" style="background: var(--green-light); border-left-color: var(--green-accent); margin-top: 16px;">
-                <strong>💰 Деньги приходят быстрее.</strong> Нет очереди из сотен документов — счёт уходит клиенту моментально, а не через дни ожидания.
+            <div class="callout reveal pulse-callout" style="background: var(--green-light); border-left-color: var(--green-accent); margin-top: 16px; border-left-width: 6px;">
+                <strong>💰 Документы уходят быстрее — деньги приходят раньше.</strong> Нет очереди из сотен задач. Договор формируется и отправляется клиенту за минуты, а не дни.
             </div>
 
             <h3 class="reveal">Аналитика и контроль</h3>
