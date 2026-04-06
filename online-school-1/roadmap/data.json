@@ -1,0 +1,302 @@
+{
+  "project": "Онлайн-школа №1",
+  "stage": "Шаг 1: Оформление договоров текущих клиентов",
+  "status": "preparation",
+  "price": "400 000 ₽",
+  "startDate": null,
+  "estimatedWeeks": "4-5",
+  "updatedAt": "2026-04-06",
+  "phases": [
+    {
+      "id": 0,
+      "name": "Подготовка",
+      "description": "Фиксация знаний, получение доступов, тестовые кейсы",
+      "status": "in_progress",
+      "progress": 15,
+      "estimatedWeeks": "1",
+      "deadline": "2026-04-15",
+      "critical": true,
+      "criticalNote": "Анастасия Якимова уходит 15.04 — без неё не стартуем",
+      "tasks": [
+        {
+          "name": "Discovery-брифинг",
+          "status": "done",
+          "owner": "forge",
+          "visibility": "public",
+          "completedAt": "2026-04-03",
+          "note": "1ч 20мин, разобрали все направления ДО"
+        },
+        {
+          "name": "Анализ регламентов и инструкций",
+          "status": "done",
+          "owner": "forge",
+          "visibility": "public",
+          "completedAt": "2026-04-04",
+          "note": "10 PDF-регламентов, все процессы разобраны"
+        },
+        {
+          "name": "Техническая оценка и архитектура",
+          "status": "done",
+          "owner": "forge",
+          "visibility": "public",
+          "completedAt": "2026-04-04",
+          "note": "Python + FastAPI, read-only 1С, без зависимости от подрядчика"
+        },
+        {
+          "name": "Коммерческое предложение",
+          "status": "done",
+          "owner": "forge",
+          "visibility": "public",
+          "completedAt": "2026-04-05",
+          "note": "Отправлено, предварительно согласовано"
+        },
+        {
+          "name": "Согласование условий и старт",
+          "status": "in_progress",
+          "owner": "both",
+          "visibility": "public",
+          "note": "Встреча 07.04"
+        },
+        {
+          "name": "Сессии с Анастасией Якимовой",
+          "status": "todo",
+          "owner": "school",
+          "visibility": "public",
+          "deadline": "2026-04-15",
+          "note": "2 сессии по 2-3 часа: процесс, ветвления, edge cases, формат карточки"
+        },
+        {
+          "name": "Тестовые кейсы от Якимовой",
+          "status": "todo",
+          "owner": "school",
+          "visibility": "public",
+          "deadline": "2026-04-15",
+          "note": "30-50 реальных переоформлений с ожидаемым результатом"
+        },
+        {
+          "name": "Шаблоны документов (.docx)",
+          "status": "todo",
+          "owner": "school",
+          "visibility": "public",
+          "deadline": "2026-04-15",
+          "note": "Все шаблоны для переоформления (оферта, бумажный)"
+        },
+        {
+          "name": "Доступы: API Amo, webhook Трекера, Google Sheets",
+          "status": "todo",
+          "owner": "school",
+          "visibility": "public",
+          "note": "Нужны к началу фазы 1"
+        },
+        {
+          "name": "OData 1С — публикация endpoint",
+          "status": "todo",
+          "owner": "school",
+          "visibility": "public",
+          "note": "~1 час работы 1С-специалиста. Read-only пользователь"
+        },
+        {
+          "name": "Тест генерации документов на реальных шаблонах",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "internal"
+        },
+        {
+          "name": "Настройка тестового окружения",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "internal"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Интеграции",
+      "description": "Подключение к системам клиента — только чтение, ничего не меняем",
+      "status": "todo",
+      "progress": 0,
+      "estimatedWeeks": "1",
+      "tasks": [
+        {
+          "name": "Сервер на Yandex Cloud",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "public",
+          "note": "Docker + PostgreSQL + LibreOffice. Данные в РФ"
+        },
+        {
+          "name": "Приём задач из Яндекс.Трекера",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "public",
+          "note": "Webhook → наш сервис"
+        },
+        {
+          "name": "Чтение данных из Amo CRM",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "public",
+          "note": "Карточка клиента по ссылке из заявки"
+        },
+        {
+          "name": "Чтение данных из 1С",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "public",
+          "note": "Договор, тариф, оплаты через OData (read-only)"
+        },
+        {
+          "name": "Чтение прайс-листа из Google Sheets",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "public",
+          "note": "Цены, акции, промокоды"
+        },
+        {
+          "name": "Маппинг полей OData 1С",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "internal"
+        },
+        {
+          "name": "OAuth2 для Amo CRM",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "internal"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Бизнес-логика",
+      "description": "Учим систему делать то, что сейчас делают сотрудники",
+      "status": "todo",
+      "progress": 0,
+      "estimatedWeeks": "1",
+      "tasks": [
+        {
+          "name": "Классификатор типа договора",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "public",
+          "note": "Оферта / бумажный, тип задачи"
+        },
+        {
+          "name": "Генерация договора и счёта (PDF)",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "public",
+          "note": "Заполнение шаблона данными → DOCX → PDF"
+        },
+        {
+          "name": "Карточка для сотрудника",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "public",
+          "note": "Итог: клиент, тариф, сумма, что создать в 1С"
+        },
+        {
+          "name": "Тесты на эталонных кейсах",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "public",
+          "note": "Сверка с реальными результатами от Якимовой"
+        },
+        {
+          "name": "Валидация входных данных",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "internal"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Доставка и контроль",
+      "description": "Отправка документов, обновление систем, обработка ошибок",
+      "status": "todo",
+      "progress": 0,
+      "estimatedWeeks": "1",
+      "tasks": [
+        {
+          "name": "Отправка документов клиенту на почту",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "public",
+          "note": "Договор + счёт (PDF) автоматически"
+        },
+        {
+          "name": "Обновление Amo, таблицы и Трекера",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "public",
+          "note": "Статусы обновляются автоматически"
+        },
+        {
+          "name": "Обработка нестандартных случаев",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "public",
+          "note": "Fallback на ручную обработку с предзаполненным черновиком"
+        },
+        {
+          "name": "Мониторинг и алерты",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "public",
+          "note": "Логирование + уведомления в Telegram при ошибках"
+        },
+        {
+          "name": "Retry-логика и очередь",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "internal"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Тестирование и запуск",
+      "description": "Прогон на реальных данных, shadow mode, переключение",
+      "status": "todo",
+      "progress": 0,
+      "estimatedWeeks": "1-2",
+      "tasks": [
+        {
+          "name": "Прогон на реальных данных",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "public",
+          "note": "30-50 тестовых кейсов, сверка с эталоном"
+        },
+        {
+          "name": "Исправление по результатам тестов",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "public"
+        },
+        {
+          "name": "Shadow mode",
+          "status": "todo",
+          "owner": "both",
+          "visibility": "public",
+          "note": "Система работает параллельно, сотрудник проверяет каждый результат"
+        },
+        {
+          "name": "Инструкция для сотрудников ДО",
+          "status": "todo",
+          "owner": "forge",
+          "visibility": "public",
+          "note": "Регламент: как работать с карточкой, что проверять"
+        },
+        {
+          "name": "Переключение на автоматический процесс",
+          "status": "todo",
+          "owner": "both",
+          "visibility": "public",
+          "note": "Плавный переход, ручной процесс остаётся как fallback"
+        }
+      ]
+    }
+  ]
+}

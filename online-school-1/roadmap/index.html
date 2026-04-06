@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roadmap проекта</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --purple: #520484;
+      --purple-light: #6b21a8;
+      --purple-bg: #f3e8ff;
+      --green: #4bc795;
+      --green-bg: #dff6d2;
+      --gray-bg: #f7f7f7;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --red: #ef4444;
+      --red-bg: #fef2f2;
+      --red-border: #fecaca;
+      --white: #ffffff;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
+      --radius: 12px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--gray-bg);
+      color: var(--gray-800);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+    }
+
+    /* --- Header --- */
+    .header {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 32px;
+    }
+
+    .header__project {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--purple);
+      margin-bottom: 8px;
+    }
+
+    .header__stage {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    .header__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+
+    .header__meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header__meta-icon {
+      font-size: 16px;
+    }
+
+    .progress-overview {
+      background: var(--gray-100);
+      border-radius: 8px;
+      padding: 16px 20px;
+    }
+
+    .progress-overview__label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gray-600);
+    }
+
+    .progress-overview__percent {
+      font-weight: 700;
+      color: var(--purple);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: var(--gray-200);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .progress-bar__fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--purple), var(--purple-light));
+      border-radius: 99px;
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .progress-bar__fill--green {
+      background: linear-gradient(90deg, var(--green), #34d399);
+    }
+
+    /* --- Timeline --- */
+    .timeline {
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--gray-200);
+      border-radius: 2px;
+    }
+
+    /* --- Phase Card --- */
+    .phase {
+      position: relative;
+      margin-bottom: 24px;
+      padding-left: 52px;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .phase.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .phase__dot {
+      position: absolute;
+      left: 12px;
+      top: 28px;
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+      background: var(--gray-300);
+      border: 3px solid var(--white);
+      box-shadow: var(--shadow-sm);
+      z-index: 1;
+    }
+
+    .phase__dot--done {
+      background: var(--green);
+    }
+
+    .phase__dot--in_progress {
+      background: var(--purple);
+      box-shadow: 0 0 0 4px rgba(82, 4, 132, 0.15);
+    }
+
+    .phase__card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      border: 2px solid transparent;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .phase__card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .phase--current .phase__card {
+      border-color: var(--green);
+      box-shadow: var(--shadow-md), 0 0 0 3px rgba(75, 199, 149, 0.15);
+    }
+
+    .phase--critical .phase__card {
+      border-color: var(--green);
+    }
+
+    .phase--critical.phase--current .phase__card {
+      border-color: var(--green);
+      box-shadow: var(--shadow-md), 0 0 0 3px rgba(75, 199, 149, 0.15);
+    }
+
+    .phase__header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .phase__name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gray-800);
+    }
+
+    .phase__badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 99px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .phase__badge--done {
+      background: var(--green-bg);
+      color: #166534;
+    }
+
+    .phase__badge--in_progress {
+      background: var(--purple-bg);
+      color: var(--purple);
+    }
+
+    .phase__badge--todo {
+      background: var(--gray-100);
+      color: var(--gray-500);
+    }
+
+    .phase__description {
+      font-size: 14px;
+      color: var(--gray-500);
+      margin-bottom: 14px;
+    }
+
+    .phase__progress {
+      margin-bottom: 16px;
+    }
+
+    .phase__progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--gray-400);
+      margin-bottom: 6px;
+    }
+
+    .phase__progress .progress-bar {
+      height: 6px;
+    }
+
+    .critical-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      background: var(--red-bg);
+      border: 1px solid var(--red-border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      color: #991b1b;
+      line-height: 1.5;
+    }
+
+    .critical-note__icon {
+      flex-shrink: 0;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    /* --- Deadline badge --- */
+    .phase__deadline {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-bottom: 16px;
+    }
+
+    /* --- Tasks --- */
+    .tasks {
+      list-style: none;
+    }
+
+    .task {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 0;
+      border-top: 1px solid var(--gray-100);
+    }
+
+    .task:first-child {
+      border-top: none;
+    }
+
+    .task__status {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      margin-top: 1px;
+    }
+
+    .task__status--done { color: var(--green); }
+    .task__status--in_progress { color: var(--purple); }
+    .task__status--todo { color: var(--gray-300); }
+    .task__status--blocked { color: var(--red); }
+
+    .task__body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .task__title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .task__name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gray-700);
+    }
+
+    .task--done .task__name {
+      color: var(--gray-400);
+      text-decoration: line-through;
+    }
+
+    .task__owner {
+      display: inline-flex;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 99px;
+      white-space: nowrap;
+    }
+
+    .task__owner--forge {
+      background: var(--purple-bg);
+      color: var(--purple);
+    }
+
+    .task__owner--client {
+      background: var(--green-bg);
+      color: #166534;
+    }
+
+    .task__owner--both {
+      background: var(--gray-100);
+      color: var(--gray-500);
+    }
+
+    .task__deadline-badge {
+      font-size: 11px;
+      color: var(--gray-400);
+      white-space: nowrap;
+    }
+
+    .task__note {
+      font-size: 13px;
+      color: var(--gray-400);
+      margin-top: 3px;
+      line-height: 1.5;
+    }
+
+    /* --- Footer --- */
+    .footer {
+      text-align: center;
+      padding: 40px 20px 20px;
+      font-size: 14px;
+      color: var(--gray-400);
+    }
+
+    .footer a {
+      color: var(--purple);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .footer__divider {
+      width: 40px;
+      height: 3px;
+      background: var(--gray-200);
+      border-radius: 2px;
+      margin: 0 auto 16px;
+    }
+
+    /* --- Loading --- */
+    .loading {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--gray-400);
+      font-size: 15px;
+    }
+
+    .loading__spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid var(--gray-200);
+      border-top-color: var(--purple);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(82, 4, 132, 0.15); }
+      50% { box-shadow: 0 0 0 8px rgba(82, 4, 132, 0.08); }
+    }
+
+    .phase__dot--in_progress {
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes checkmark-pop {
+      0% { transform: scale(0); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+
+    .task__status--done {
+      animation: checkmark-pop 0.4s ease-out;
+    }
+
+    .phase__badge--done {
+      animation: checkmark-pop 0.4s ease-out;
+    }
+
+    /* Progress bar animation on load */
+    @keyframes grow-width {
+      from { width: 0; }
+    }
+
+    .progress-bar__fill {
+      animation: grow-width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Subtle glow on current phase */
+    .phase--current .phase__card {
+      animation: glow-border 3s ease-in-out infinite;
+    }
+
+    @keyframes glow-border {
+      0%, 100% { box-shadow: var(--shadow-md), 0 0 0 3px rgba(75, 199, 149, 0.15); }
+      50% { box-shadow: var(--shadow-md), 0 0 0 6px rgba(75, 199, 149, 0.25); }
+    }
+
+    /* Count-up animation for numbers */
+    .header__stage {
+      animation: fadeSlideIn 0.6s ease-out;
+    }
+
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header {
+      animation: fadeSlideIn 0.5s ease-out;
+    }
+
+    .error {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--red);
+      font-size: 15px;
+    }
+
+    /* --- Mobile --- */
+    @media (max-width: 640px) {
+      .container {
+        padding: 16px 12px 40px;
+      }
+
+      .header {
+        padding: 20px;
+      }
+
+      .header__stage {
+        font-size: 18px;
+      }
+
+      .header__meta {
+        gap: 10px;
+        font-size: 13px;
+      }
+
+      .timeline::before {
+        left: 14px;
+      }
+
+      .phase {
+        padding-left: 40px;
+        margin-bottom: 16px;
+      }
+
+      .phase__dot {
+        left: 6px;
+        top: 24px;
+        width: 17px;
+        height: 17px;
+      }
+
+      .phase__card {
+        padding: 16px;
+      }
+
+      .phase__name {
+        font-size: 16px;
+      }
+
+      .phase__header {
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .task__title-row {
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="app">
+    <div class="loading" id="loading">
+      <div class="loading__spinner"></div>
+      Загрузка...
+    </div>
+  </div>
+
+  <!-- Для проверки через file:// — запустите локальный сервер:
+       python3 -m http.server 8000
+       затем откройте http://localhost:8000 -->
+
+  <script>
+    const STATUS_ICON = {
+      done: '<span class="task__status task__status--done">&#10003;</span>',
+      in_progress: '<span class="task__status task__status--in_progress">&#9654;</span>',
+      todo: '<span class="task__status task__status--todo">&#9675;</span>',
+      blocked: '<span class="task__status task__status--blocked">&#9940;</span>'
+    };
+
+    const STATUS_LABEL = {
+      done: 'Готово',
+      in_progress: 'В работе',
+      todo: 'Не начато'
+    };
+
+    const OWNER_LABEL = {
+      forge: 'Forge',
+      school: 'Онлайн-школа №1',
+      client: 'Онлайн-школа №1',
+      both: 'Совместно'
+    };
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr + 'T00:00:00');
+      const day = d.getDate();
+      const months = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+      return `${day} ${months[d.getMonth()]}`;
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function calcOverallProgress(phases) {
+      if (!phases.length) return 0;
+      const total = phases.reduce((sum, p) => sum + (p.progress || 0), 0);
+      return Math.round(total / phases.length);
+    }
+
+    function getCurrentPhaseIndex(phases) {
+      for (let i = phases.length - 1; i >= 0; i--) {
+        if (phases[i].status === 'in_progress') return i;
+        if (phases[i].status === 'done') return Math.min(i + 1, phases.length - 1);
+      }
+      return 0;
+    }
+
+    function renderHeader(data) {
+      const overall = calcOverallProgress(data.phases);
+      const phasesDone = data.phases.filter(p => p.status === 'done').length;
+      return `
+        <div class="header">
+          <div class="header__project">${escapeHtml(data.project)}</div>
+          <h1 class="header__stage">${escapeHtml(data.stage)}</h1>
+          <div class="header__meta">
+            <span class="header__meta-item">
+              <span class="header__meta-icon">&#128197;</span>
+              Обновлено: ${formatDate(data.updatedAt)}
+            </span>
+            <span class="header__meta-item">
+              <span class="header__meta-icon">&#9201;</span>
+              Срок: ${escapeHtml(data.estimatedWeeks)} нед.
+            </span>
+            <span class="header__meta-item">
+              <span class="header__meta-icon">&#128203;</span>
+              Фаз: ${phasesDone}/${data.phases.length}
+            </span>
+          </div>
+          <div class="progress-overview">
+            <div class="progress-overview__label">
+              <span>Общий прогресс</span>
+              <span class="progress-overview__percent">${overall}%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-bar__fill" style="width: ${overall}%"></div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTask(task) {
+      const icon = STATUS_ICON[task.status] || STATUS_ICON.todo;
+      const ownerKey = task.owner === 'school' ? 'client' : task.owner;
+      const ownerClass = `task__owner--${ownerKey}`;
+      const ownerLabel = OWNER_LABEL[task.owner] || task.owner;
+      const doneClass = task.status === 'done' ? ' task--done' : '';
+
+      let deadlineHtml = '';
+      if (task.deadline) {
+        deadlineHtml = `<span class="task__deadline-badge">&#128197; ${formatDate(task.deadline)}</span>`;
+      }
+
+      let noteHtml = '';
+      if (task.note) {
+        noteHtml = `<div class="task__note">${escapeHtml(task.note)}</div>`;
+      }
+
+      return `
+        <li class="task${doneClass}">
+          ${icon}
+          <div class="task__body">
+            <div class="task__title-row">
+              <span class="task__name">${escapeHtml(task.name)}</span>
+              <span class="task__owner ${ownerClass}">${ownerLabel}</span>
+              ${deadlineHtml}
+            </div>
+            ${noteHtml}
+          </div>
+        </li>
+      `;
+    }
+
+    function renderPhase(phase, index, currentIndex) {
+      const isCurrent = index === currentIndex;
+      const isCritical = phase.critical;
+
+      const dotClass = phase.status === 'done' ? 'phase__dot--done'
+        : phase.status === 'in_progress' ? 'phase__dot--in_progress'
+        : '';
+
+      const badgeClass = `phase__badge--${phase.status}`;
+      const badgeLabel = STATUS_LABEL[phase.status] || phase.status;
+
+      let criticalHtml = '';
+      if (isCritical && phase.criticalNote) {
+        criticalHtml = `
+          <div class="critical-note">
+            <span class="critical-note__icon">&#9888;&#65039;</span>
+            <span>${escapeHtml(phase.criticalNote)}</span>
+          </div>
+        `;
+      }
+
+      let deadlineHtml = '';
+      if (phase.deadline) {
+        deadlineHtml = `<div class="phase__deadline">&#128197; Дедлайн фазы: ${formatDate(phase.deadline)}</div>`;
+      }
+
+      const publicTasks = (phase.tasks || []).filter(t => t.visibility === 'public');
+      const tasksHtml = publicTasks.map(renderTask).join('');
+
+      const currentClass = isCurrent ? ' phase--current' : '';
+      const criticalClass = isCritical ? ' phase--critical' : '';
+
+      const progressBarClass = phase.status === 'done' ? ' progress-bar__fill--green' : '';
+
+      return `
+        <div class="phase${currentClass}${criticalClass}" data-phase="${index}">
+          <div class="phase__dot ${dotClass}"></div>
+          <div class="phase__card">
+            <div class="phase__header">
+              <span class="phase__name">${escapeHtml(phase.name)}</span>
+              <span class="phase__badge ${badgeClass}">${badgeLabel}</span>
+            </div>
+            <div class="phase__description">${escapeHtml(phase.description)}${phase.estimatedWeeks ? ` · <strong>${phase.estimatedWeeks} нед.</strong>` : ''}</div>
+            ${criticalHtml}
+            ${deadlineHtml}
+            <div class="phase__progress">
+              <div class="phase__progress-label">
+                <span>Прогресс</span>
+                <span>${phase.progress}%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar__fill${progressBarClass}" style="width: ${phase.progress}%"></div>
+              </div>
+            </div>
+            <ul class="tasks">
+              ${tasksHtml}
+            </ul>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderFooter() {
+      return `
+        <div class="footer">
+          <div class="footer__divider"></div>
+          <p>Наиль Мардамшин &middot; Forge &middot; <a href="https://t.me/nmardamshin" target="_blank" rel="noopener">Telegram</a></p>
+        </div>
+      `;
+    }
+
+    function render(data) {
+      const app = document.getElementById('app');
+      const currentIndex = getCurrentPhaseIndex(data.phases);
+
+      const phasesHtml = data.phases.map((phase, i) =>
+        renderPhase(phase, i, currentIndex)
+      ).join('');
+
+      app.innerHTML = `
+        ${renderHeader(data)}
+        <div class="timeline">
+          ${phasesHtml}
+        </div>
+        ${renderFooter()}
+      `;
+
+      initScrollAnimations();
+    }
+
+    function initScrollAnimations() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const delay = entry.target.dataset.phase * 80;
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, delay);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      document.querySelectorAll('.phase').forEach(el => observer.observe(el));
+    }
+
+    async function init() {
+      try {
+        const response = await fetch('./data.json');
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        render(data);
+      } catch (err) {
+        document.getElementById('app').innerHTML = `
+          <div class="error">
+            <p>Не удалось загрузить данные</p>
+            <p style="font-size: 13px; color: #9ca3af; margin-top: 8px;">
+              Откройте через HTTP-сервер: <code>python3 -m http.server 8000</code>
+            </p>
+          </div>
+        `;
+        console.error('Ошибка загрузки data.json:', err);
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
