@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI для Бюро Глагол — 5 точек роста от Forge</title>
+  <meta name="description" content="Коммерчески обоснованные идеи AI-интеграции для бюро публичных выступлений: снижение костов, рост выручки, конкурентное преимущество.">
+  <meta property="og:title" content="AI × Бюро Глагол — 5 точек роста">
+  <meta property="og:description" content="От оптимизации процессов до нового продуктового слоя. Каждая идея — с коммерческим обоснованием и скором.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --orange: #ff5c00;
+      --orange-light: #fff0e8;
+      --orange-mid: rgba(255,92,0,0.12);
+      --green: #c3e5ae;
+      --green-dark: #3a7d2f;
+      --green-light: #f0faea;
+      --dark: #1a1a1a;
+      --muted: #767676;
+      --bg: #fbfbfb;
+      --surface: #ffffff;
+      --border: #e8e8e8;
+      --hero-bg: #1a1a1a;
+      --radius: 20px;
+      --radius-sm: 12px;
+      --radius-pill: 100px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Arial, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4, .display {
+      font-family: 'Wix Madefor Display', Arial, sans-serif;
+      letter-spacing: -0.02em;
+    }
+    .container { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+    /* ═══ HERO ═══ */
+    .hero {
+      background: var(--hero-bg);
+      color: white;
+      padding: 72px 0 64px;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.75);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 28px;
+    }
+    .hero-eyebrow::before { content: '⚡'; }
+    .hero h1 {
+      font-size: clamp(32px, 5.5vw, 54px);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      max-width: 700px;
+    }
+    .hero h1 .orange { color: var(--orange); }
+    .hero-lead {
+      font-size: 17px;
+      color: rgba(255,255,255,0.65);
+      max-width: 560px;
+      margin-bottom: 44px;
+      line-height: 1.65;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 0;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      overflow: hidden;
+      max-width: 560px;
+    }
+    .hero-stat {
+      flex: 1;
+      padding: 20px 24px;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-val {
+      display: block;
+      font-family: 'Wix Madefor Display', Arial, sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .hero-stat-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ═══ SECTIONS ═══ */
+    .section { padding: 72px 0; }
+    .section + .section { padding-top: 0; }
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .section-desc {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 580px;
+      margin-bottom: 40px;
+      line-height: 1.65;
+    }
+    .divider { border: none; border-top: 1px solid var(--border); }
+
+    /* ═══ INSIGHT GRID ═══ */
+    .insight-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 600px) { .insight-grid { grid-template-columns: 1fr; } }
+    .insight-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .insight-icon { font-size: 22px; flex-shrink: 0; line-height: 1.3; }
+    .insight-text { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .insight-text strong { color: var(--dark); }
+
+    /* ═══ SCORING BLOCK ═══ */
+    .scoring-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .scoring-header {
+      background: var(--dark);
+      color: white;
+      padding: 20px 24px 18px;
+    }
+    .scoring-header h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .scoring-header p { font-size: 13px; color: rgba(255,255,255,0.55); }
+    .scoring-criteria {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+    @media (max-width: 640px) { .scoring-criteria { grid-template-columns: 1fr 1fr; } }
+    .criterion {
+      padding: 16px 18px;
+      border-right: 1px solid var(--border);
+    }
+    .criterion:last-child { border-right: none; }
+    .crit-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .crit-weight {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--orange);
+      font-family: 'Wix Madefor Display', Arial, sans-serif;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .crit-desc { font-size: 12px; color: var(--muted); line-height: 1.4; }
+    .scoring-table-wrap { overflow-x: auto; }
+    table.scoring {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    table.scoring th {
+      background: #f7f7f7;
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    table.scoring td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    table.scoring tr:last-child td { border-bottom: none; }
+    table.scoring tr.top5 td { background: #fffcf5; }
+    .idea-label { font-weight: 600; color: var(--dark); }
+    .idea-cat {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .score-bar-cell { min-width: 120px; }
+    .score-bar-wrap { display: flex; align-items: center; gap: 8px; }
+    .score-bar {
+      flex: 1;
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .score-bar-fill {
+      height: 100%;
+      background: var(--orange);
+      border-radius: 3px;
+    }
+    .score-val {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--dark);
+      white-space: nowrap;
+    }
+    .rank-badge {
+      display: inline-flex;
+      width: 24px; height: 24px;
+      align-items: center; justify-content: center;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .rank-top { background: var(--orange-mid); color: var(--orange); }
+    .rank-other { background: #f0f0f0; color: var(--muted); }
+
+    /* ═══ IDEAS ═══ */
+    .ideas-list { display: flex; flex-direction: column; gap: 24px; }
+    .idea-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .idea-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+    .idea-top {
+      padding: 24px 26px 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--border);
+    }
+    .idea-rank {
+      width: 36px; height: 36px;
+      background: var(--dark);
+      color: white;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Wix Madefor Display', Arial, sans-serif;
+      font-size: 14px; font-weight: 800;
+      flex-shrink: 0;
+    }
+    .idea-head { flex: 1; }
+    .idea-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .idea-subtitle { font-size: 13px; color: var(--muted); }
+    .idea-tags { display: flex; gap: 6px; flex-wrap: wrap; align-items: flex-start; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      white-space: nowrap;
+    }
+    .tag-ops { background: var(--green-light); color: var(--green-dark); }
+    .tag-product { background: var(--orange-light); color: var(--orange); }
+    .tag-new { background: #ede8ff; color: #5b4fcf; }
+    .tag-score {
+      background: var(--dark);
+      color: white;
+    }
+    .idea-body { padding: 20px 26px 24px; }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 580px) { .two-col { grid-template-columns: 1fr; } }
+    .col-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .col-text { font-size: 14px; line-height: 1.65; }
+    .commercial {
+      background: var(--orange-light);
+      border: 1px solid rgba(255,92,0,0.18);
+      border-radius: var(--radius-sm);
+      padding: 16px 18px;
+    }
+    .commercial-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+    .commercial-items { display: flex; flex-direction: column; gap: 6px; }
+    .commercial-item {
+      display: flex;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .commercial-item::before { content: '→'; color: var(--orange); font-weight: 700; flex-shrink: 0; }
+    .commercial-item strong { color: var(--dark); }
+
+    /* ═══ FIRST STEP ═══ */
+    .first-step {
+      background: var(--dark);
+      color: white;
+      border-radius: var(--radius);
+      padding: 36px;
+    }
+    .first-step-badge {
+      display: inline-block;
+      background: rgba(255,92,0,0.2);
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 18px;
+    }
+    .first-step h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .first-step-desc {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 28px;
+      max-width: 580px;
+    }
+    .ba-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    @media (max-width: 540px) { .ba-grid { grid-template-columns: 1fr; } }
+    .ba-box {
+      border-radius: var(--radius-sm);
+      padding: 18px;
+    }
+    .ba-before { background: rgba(255,255,255,0.05); }
+    .ba-after {
+      background: rgba(255,92,0,0.1);
+      border: 1px solid rgba(255,92,0,0.25);
+    }
+    .ba-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 10px;
+    }
+    .ba-after .ba-label { color: var(--orange); }
+    .ba-items { display: flex; flex-direction: column; gap: 6px; }
+    .ba-item {
+      display: flex;
+      gap: 8px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+    }
+    .ba-after .ba-item { color: rgba(255,255,255,0.9); }
+    .ba-item::before { font-size: 12px; flex-shrink: 0; }
+    .ba-before .ba-item::before { content: '✕'; color: #f87171; }
+    .ba-after .ba-item::before { content: '✓'; color: var(--orange); }
+    .metrics-row {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+    .metric { display: flex; flex-direction: column; gap: 2px; }
+    .metric-val {
+      font-family: 'Wix Madefor Display', Arial, sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--orange);
+      line-height: 1;
+    }
+    .metric-label { font-size: 12px; color: rgba(255,255,255,0.45); }
+
+    /* ═══ WHY FORGE ═══ */
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 540px) { .why-grid { grid-template-columns: 1fr; } }
+    .why-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+    }
+    .why-icon { font-size: 24px; margin-bottom: 10px; }
+    .why-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .why-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ═══ CTA ═══ */
+    .cta-section { padding: 72px 0 80px; }
+    .cta-box {
+      background: var(--dark);
+      border-radius: var(--radius);
+      padding: 52px 40px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-box::after {
+      content: '';
+      position: absolute;
+      right: -60px; bottom: -60px;
+      width: 280px; height: 280px;
+      background: radial-gradient(circle, rgba(255,92,0,0.2), transparent 70%);
+      pointer-events: none;
+    }
+    .cta-box h2 {
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+    .cta-box p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.6);
+      max-width: 500px;
+      margin: 0 auto 36px;
+    }
+    .cta-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-orange {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--orange); color: white;
+      font-family: 'Wix Madefor Display', Arial, sans-serif;
+      font-size: 15px; font-weight: 700;
+      padding: 15px 30px; border-radius: var(--radius-pill);
+      text-decoration: none; transition: all 0.15s;
+    }
+    .btn-orange:hover { opacity: 0.88; transform: translateY(-2px); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: rgba(255,255,255,0.7);
+      font-size: 15px; font-weight: 500;
+      padding: 15px 30px; border-radius: var(--radius-pill);
+      text-decoration: none; border: 1px solid rgba(255,255,255,0.15);
+      transition: all 0.15s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.4); color: white; }
+
+    /* ═══ FOOTER ═══ */
+    .page-footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .forge-logo {
+      font-family: 'Wix Madefor Display', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+    .forge-logo span { color: var(--orange); }
+    .footer-note { font-size: 13px; color: var(--muted); }
+
+    @media (max-width: 480px) {
+      .hero-stats { flex-direction: column; border: none; gap: 16px; }
+      .hero-stat { border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm); }
+      .first-step { padding: 24px; }
+      .cta-box { padding: 36px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">Forge AI → Бюро Глагол</div>
+    <h1>5 точек роста<br>с помощью <span class="orange">AI</span></h1>
+    <p class="hero-lead">
+      Не «внедрить AI» ради тренда. Только коммерчески обоснованные идеи:
+      каждая прошла скоринг по 5 критериям — снижение костов, рост выручки,
+      конверсия, скорость внедрения, конкурентный барьер.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-val">9</span>
+        <span class="hero-stat-label">идей оценили</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-val">5</span>
+        <span class="hero-stat-label">прошли порог</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-val">3–5 нед</span>
+        <span class="hero-stat-label">до результата</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT GLAGOL -->
+<section class="section">
+  <div class="container">
+    <div class="eyebrow">Контекст</div>
+    <h2 class="section-title">Что мы увидели</h2>
+    <p class="section-desc">Изучили сайт, продукты, кейсы, конкурентов на глобальном рынке. Четыре наблюдения.</p>
+
+    <div class="insight-grid">
+      <div class="insight-card">
+        <div class="insight-icon">🔄</div>
+        <div class="insight-text">
+          <strong>Смена позиционирования — правильный ход.</strong>
+          «Учим ораторству» конкурирует с YouTube. «Решаем бизнес-задачи через коммуникацию» — другой рынок, другие бюджеты, другой LTV.
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon">📊</div>
+        <div class="insight-text">
+          <strong>reviews.glagol.me — недооценённый продукт.</strong>
+          Ручной разбор — это сервис, который не масштабируется. AI-слой превращает его в асинхронный продукт с потенциалом SaaS.
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon">🌍</div>
+        <div class="insight-text">
+          <strong>Глобальные конкуренты (Yoodli, Orai) не в РФ.</strong>
+          AI speech coaching — активный рынок $500M+. В рунете его пока нет. Окно для первого мувера открыто.
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-icon">🎪</div>
+        <div class="insight-text">
+          <strong>G8 Festival — доказанная экспертиза в event production.</strong>
+          Полный цикл от концепции до сцены = есть понимание процесса подготовки, которое можно автоматизировать и монетизировать отдельно.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SCORING CRITERIA -->
+<section class="section">
+  <div class="container">
+    <div class="eyebrow">Методология</div>
+    <h2 class="section-title">Как выбирали идеи</h2>
+    <p class="section-desc">
+      Оценили 9 вариантов по 5 коммерческим критериям. Каждый — от 1 до 5 баллов, с весом.
+      Проходной порог: 3.3/5. В финал вышли 5 идей.
+    </p>
+
+    <div class="scoring-wrap" style="margin-bottom:32px">
+      <div class="scoring-header">
+        <h3>Критерии скоринга</h3>
+        <p>Каждый критерий оценивается 1–5, итоговый балл — взвешенная сумма</p>
+      </div>
+      <div class="scoring-criteria">
+        <div class="criterion">
+          <div class="crit-weight">25%</div>
+          <div class="crit-name">Снижение костов</div>
+          <div class="crit-desc">Экономит ли время тренеров или операционные расходы</div>
+        </div>
+        <div class="criterion">
+          <div class="crit-weight">25%</div>
+          <div class="crit-name">Рост выручки</div>
+          <div class="crit-desc">Открывает новый revenue stream или увеличивает LTV</div>
+        </div>
+        <div class="criterion">
+          <div class="crit-weight">20%</div>
+          <div class="crit-name">Конверсия</div>
+          <div class="crit-desc">Влияет на привлечение или конверсию новых клиентов</div>
+        </div>
+        <div class="criterion">
+          <div class="crit-weight">15%</div>
+          <div class="crit-name">Скорость</div>
+          <div class="crit-desc">Как быстро от идеи до работающего результата</div>
+        </div>
+        <div class="criterion" style="border-right:none">
+          <div class="crit-weight">15%</div>
+          <div class="crit-name">Барьер</div>
+          <div class="crit-desc">Создаёт ли устойчивое конкурентное преимущество</div>
+        </div>
+      </div>
+      <div class="scoring-table-wrap">
+        <table class="scoring">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Идея</th>
+              <th>Тип</th>
+              <th>Снижение костов</th>
+              <th>Рост выручки</th>
+              <th>Конверсия</th>
+              <th>Скорость</th>
+              <th>Барьер</th>
+              <th>Итог</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="top5">
+              <td><span class="rank-badge rank-top">1</span></td>
+              <td><div class="idea-label">AI Video Coach</div><div class="idea-cat">Продуктовый слой</div></td>
+              <td><span class="tag tag-product" style="font-size:11px">product</span></td>
+              <td>5</td><td>4</td><td>4</td><td>4</td><td>3</td>
+              <td class="score-bar-cell"><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:82%"></div></div><span class="score-val">4.1</span></div></td>
+            </tr>
+            <tr class="top5">
+              <td><span class="rank-badge rank-top">2</span></td>
+              <td><div class="idea-label">AI Sales Automation</div><div class="idea-cat">Оптимизация воронки</div></td>
+              <td><span class="tag tag-ops" style="font-size:11px">ops</span></td>
+              <td>3</td><td>5</td><td>5</td><td>4</td><td>2</td>
+              <td class="score-bar-cell"><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:78%"></div></div><span class="score-val">3.9</span></div></td>
+            </tr>
+            <tr class="top5">
+              <td><span class="rank-badge rank-top">3</span></td>
+              <td><div class="idea-label">Персонализированный курс</div><div class="idea-cat">AI в продукте</div></td>
+              <td><span class="tag tag-product" style="font-size:11px">product</span></td>
+              <td>3</td><td>4</td><td>5</td><td>3</td><td>3</td>
+              <td class="score-bar-cell"><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:73%"></div></div><span class="score-val">3.65</span></div></td>
+            </tr>
+            <tr class="top5">
+              <td><span class="rank-badge rank-top">4</span></td>
+              <td><div class="idea-label">Pre-Meeting Brief</div><div class="idea-cat">Новый SaaS-продукт</div></td>
+              <td><span class="tag tag-new" style="font-size:11px">new</span></td>
+              <td>2</td><td>5</td><td>3</td><td>3</td><td>5</td>
+              <td class="score-bar-cell"><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:71%"></div></div><span class="score-val">3.55</span></div></td>
+            </tr>
+            <tr class="top5">
+              <td><span class="rank-badge rank-top">5</span></td>
+              <td><div class="idea-label">AI Speech Builder</div><div class="idea-cat">Lead magnet + feature</div></td>
+              <td><span class="tag tag-product" style="font-size:11px">product</span></td>
+              <td>4</td><td>3</td><td>3</td><td>5</td><td>2</td>
+              <td class="score-bar-cell"><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:68%"></div></div><span class="score-val">3.4</span></div></td>
+            </tr>
+            <tr>
+              <td><span class="rank-badge rank-other">—</span></td>
+              <td><div class="idea-label">Speaker Selection AI</div><div class="idea-cat">B2B конференции</div></td>
+              <td><span class="tag tag-new" style="font-size:11px">new</span></td>
+              <td>2</td><td>4</td><td>2</td><td>4</td><td>4</td>
+              <td class="score-bar-cell"><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:62%;background:#ccc"></div></div><span class="score-val" style="color:var(--muted)">3.1</span></div></td>
+            </tr>
+            <tr>
+              <td><span class="rank-badge rank-other">—</span></td>
+              <td><div class="idea-label">ROI Dashboard</div><div class="idea-cat">B2B analytics</div></td>
+              <td><span class="tag tag-new" style="font-size:11px">new</span></td>
+              <td>1</td><td>5</td><td>2</td><td>2</td><td>5</td>
+              <td class="score-bar-cell"><div class="score-bar-wrap"><div class="score-bar"><div class="score-bar-fill" style="width:59%;background:#ccc"></div></div><span class="score-val" style="color:var(--muted)">2.95</span></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- TOP 5 IDEAS -->
+<section class="section">
+  <div class="container">
+    <div class="eyebrow">Топ-5</div>
+    <h2 class="section-title">Идеи с полным обоснованием</h2>
+    <p class="section-desc">От продуктовых слоёв до новых revenue streams. Три типа интервенции — оптимизация процессов, улучшение продукта, новые продукты.</p>
+
+    <div class="ideas-list">
+
+      <!-- 01 AI Video Coach -->
+      <div class="idea-card">
+        <div class="idea-top">
+          <div class="idea-rank">01</div>
+          <div class="idea-head">
+            <div class="idea-title">AI Video Coach — масштабируемый разбор выступлений</div>
+            <div class="idea-subtitle">Превратить reviews.glagol.me из ручного сервиса в автоматизированный продукт</div>
+          </div>
+          <div class="idea-tags">
+            <span class="tag tag-product">product layer</span>
+            <span class="tag tag-score">4.1/5</span>
+          </div>
+        </div>
+        <div class="idea-body">
+          <div class="two-col">
+            <div>
+              <div class="col-label">Проблема</div>
+              <div class="col-text">Один разбор выступления = N часов тренера. Дорого, медленно, не масштабируется. Цена сервиса ограничивает аудиторию. Глобальные конкуренты (Yoodli) уже делают это, но без русского языка и локального контекста.</div>
+            </div>
+            <div>
+              <div class="col-label">AI-решение</div>
+              <div class="col-text">Клиент загружает видео → AI-отчёт за 3 минуты: темп речи, слова-паразиты, паузы, структура, уверенность, динамика vs прошлых записей. Тренер фокусируется на нюансах, которые AI не видит.</div>
+            </div>
+          </div>
+          <div class="commercial">
+            <div class="commercial-title">Коммерческое обоснование</div>
+            <div class="commercial-items">
+              <div class="commercial-item"><strong>x10 масштаб без роста штата</strong> — 1 тренер закрывает в 10 раз больше студентов</div>
+              <div class="commercial-item"><strong>Новый affordable tier</strong> — «AI-разбор» как входной билет, конвертирует в полный курс</div>
+              <div class="commercial-item"><strong>SaaS для корпоратов</strong> — команда загружает записи встреч → автоматический feedback без тренера</div>
+              <div class="commercial-item"><strong>Retention</strong> — прогресс виден визуально → люди заканчивают курс → лучше NPS → реферралы</div>
+              <div class="commercial-item"><strong>Локальное преимущество</strong> — Yoodli не понимает рунглиш, деловой стиль РФ, слова-паразиты в русском</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 AI Sales Automation -->
+      <div class="idea-card">
+        <div class="idea-top">
+          <div class="idea-rank">02</div>
+          <div class="idea-head">
+            <div class="idea-title">AI Sales Automation — персонализированная воронка продаж</div>
+            <div class="idea-subtitle">Оптимизация внутренних процессов: больше конверсий с тем же трафиком</div>
+          </div>
+          <div class="idea-tags">
+            <span class="tag tag-ops">ops</span>
+            <span class="tag tag-score">3.9/5</span>
+          </div>
+        </div>
+        <div class="idea-body">
+          <div class="two-col">
+            <div>
+              <div class="col-label">Проблема</div>
+              <div class="col-text">Лиды приходят разные: CEO готовится к совету директоров, стартапер хочет питч, HR ищет программу для команды. Сейчас все получают одинаковый ответ. Конверсия не оптимальна.</div>
+            </div>
+            <div>
+              <div class="col-label">AI-решение</div>
+              <div class="col-text">AI квалифицирует лид по форме/боту, сегментирует по роли и задаче, генерирует персональное follow-up письмо с релевантным кейсом и предложением. Менеджер видит уже тёплый лид с контекстом.</div>
+            </div>
+          </div>
+          <div class="commercial">
+            <div class="commercial-title">Коммерческое обоснование</div>
+            <div class="commercial-items">
+              <div class="commercial-item"><strong>Рост конверсии лидов</strong> — персонализация увеличивает CR на 20–40% (данные аналогичных внедрений)</div>
+              <div class="commercial-item"><strong>Снижение времени менеджера</strong> — ручная квалификация и написание писем → автоматически</div>
+              <div class="commercial-item"><strong>Быстрая реализация</strong> — n8n + CRM + Claude API, без кастомной разработки, 2–3 недели</div>
+              <div class="commercial-item"><strong>Прямой ROI</strong> — при среднем чеке курса 30К+ даже +5 продаж/мес окупает внедрение за 1 месяц</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 Personalized Learning -->
+      <div class="idea-card">
+        <div class="idea-top">
+          <div class="idea-rank">03</div>
+          <div class="idea-head">
+            <div class="idea-title">Персонализированный курс — AI-диагностика и индивидуальный путь</div>
+            <div class="idea-subtitle">Поднять completion rate и стать дифференциатором при выборе курса</div>
+          </div>
+          <div class="idea-tags">
+            <span class="tag tag-product">product</span>
+            <span class="tag tag-score">3.65/5</span>
+          </div>
+        </div>
+        <div class="idea-body">
+          <div class="two-col">
+            <div>
+              <div class="col-label">Проблема</div>
+              <div class="col-text">Все студенты идут по единому curriculum. Кто-то скучает на базовом, кто-то теряется на продвинутом. Churn высокий — люди бросают курс в середине. Одинаковый продукт сложно выделить среди конкурентов.</div>
+            </div>
+            <div>
+              <div class="col-label">AI-решение</div>
+              <div class="col-text">Intake-анкета + короткий диагностический блок → AI строит индивидуальный план: какие модули пропустить, какие углубить, что приоритизировать для вашей роли (продажи, выступления, встречи, TEDx).</div>
+            </div>
+          </div>
+          <div class="commercial">
+            <div class="commercial-title">Коммерческое обоснование</div>
+            <div class="commercial-items">
+              <div class="commercial-item"><strong>Дифференциатор при выборе</strong> — «курс под тебя» vs «курс для всех» = проще убедить потенциального клиента</div>
+              <div class="commercial-item"><strong>+30–50% completion</strong> — люди заканчивают то, что релевантно → лучше отзывы → органический рост</div>
+              <div class="commercial-item"><strong>Premium tier</strong> — «персонализированная дорожка» обоснованно стоит дороже стандарта</div>
+              <div class="commercial-item"><strong>Данные для улучшения продукта</strong> — видно, где люди отваливаются → итерации с доказательствами</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 Pre-Meeting Brief -->
+      <div class="idea-card">
+        <div class="idea-top">
+          <div class="idea-rank">04</div>
+          <div class="idea-head">
+            <div class="idea-title">Pre-Meeting Brief — AI-помощник перед каждой важной встречей</div>
+            <div class="idea-subtitle">Новый B2B SaaS-продукт под обновлённый positioning бюро</div>
+          </div>
+          <div class="idea-tags">
+            <span class="tag tag-new">new product</span>
+            <span class="tag tag-score">3.55/5</span>
+          </div>
+        </div>
+        <div class="idea-body">
+          <div class="two-col">
+            <div>
+              <div class="col-label">Механика</div>
+              <div class="col-text">Менеджер вводит: цель встречи, кто участвует, что хочу получить → AI выдаёт бриф за 5 минут: 3 ключевых тезиса, что не говорить, ожидаемые возражения + рекомендуемые ответы.</div>
+            </div>
+            <div>
+              <div class="col-label">Результат для клиента</div>
+              <div class="col-text">Конкретная подготовка прямо перед встречей в четверг, а не «научись выступать за 3 месяца». Прямо работает на новый positioning: «решаем бизнес-задачи через коммуникацию».</div>
+            </div>
+          </div>
+          <div class="commercial">
+            <div class="commercial-title">Коммерческое обоснование</div>
+            <div class="commercial-items">
+              <div class="commercial-item"><strong>Новый revenue stream</strong> — подписочная модель для команд (B2B SaaS), не зависит от тренингового цикла</div>
+              <div class="commercial-item"><strong>Нет аналогов на рынке</strong> — первые получают «category creator» позицию в RU</div>
+              <div class="commercial-item"><strong>Входной билет без тренинга</strong> — инструмент покупают отдельно, потом апсейл на курс/коучинг</div>
+              <div class="commercial-item"><strong>Максимальный барьер</strong> — 5/5. Компании платят подписку, данные накапливаются, уйти сложно</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 05 AI Speech Builder -->
+      <div class="idea-card">
+        <div class="idea-top">
+          <div class="idea-rank">05</div>
+          <div class="idea-head">
+            <div class="idea-title">AI Speech Builder — структура и черновик речи за 10 минут</div>
+            <div class="idea-subtitle">Lead magnet + встроенная feature курса, быстрый запуск</div>
+          </div>
+          <div class="idea-tags">
+            <span class="tag tag-product">product feature</span>
+            <span class="tag tag-score">3.4/5</span>
+          </div>
+        </div>
+        <div class="idea-body">
+          <div class="two-col">
+            <div>
+              <div class="col-label">Механика</div>
+              <div class="col-text">Клиент описывает тему, аудиторию и цель выступления → AI генерирует структуру (hook, 3 блока, call to action) + черновик ключевых тезисов. Тренер дорабатывает, а не начинает с нуля.</div>
+            </div>
+            <div>
+              <div class="col-label">Зачем</div>
+              <div class="col-text">Снижает «страх белого листа» — главный барьер для начала работы. Клиент приходит к тренеру уже с материалом → сессии эффективнее. Бесплатная версия = lead magnet с высокой конверсией.</div>
+            </div>
+          </div>
+          <div class="commercial">
+            <div class="commercial-title">Коммерческое обоснование</div>
+            <div class="commercial-items">
+              <div class="commercial-item"><strong>Lead magnet</strong> — бесплатный инструмент → захват email → воронка в платный курс</div>
+              <div class="commercial-item"><strong>Снижение операционного времени тренеров</strong> — первичная структура готова автоматически, тренер тратит меньше времени на подготовку</div>
+              <div class="commercial-item"><strong>Быстрее всего в реализации</strong> — 5/5 по скорости. Claude API + форма = 1–2 недели до MVP</div>
+              <div class="commercial-item"><strong>Ценность для корпоративных клиентов</strong> — встраивается в программу как self-service инструмент между сессиями</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- FIRST STEP -->
+<section class="section">
+  <div class="container">
+    <div class="eyebrow">Рекомендация</div>
+    <h2 class="section-title">С чего начать</h2>
+    <p class="section-desc">Если делать один первый шаг — рекомендуем идею №1. Быстрый результат, наименьший риск, и у вас уже есть reviews.glagol.me как основа.</p>
+
+    <div class="first-step">
+      <div class="first-step-badge">Шаг 1 — рекомендуемый</div>
+      <h3>AI-слой на reviews.glagol.me</h3>
+      <p class="first-step-desc">Инфраструктура уже есть. Добавляем AI-анализ видео поверх — и ручной сервис становится масштабируемым продуктом с подпиской.</p>
+
+      <div class="ba-grid">
+        <div class="ba-box ba-before">
+          <div class="ba-label">Сейчас</div>
+          <div class="ba-items">
+            <div class="ba-item">30–60 мин тренера на 1 разбор</div>
+            <div class="ba-item">Ограниченный масштаб</div>
+            <div class="ba-item">Высокая цена → узкая аудитория</div>
+            <div class="ba-item">Нет трекинга прогресса</div>
+            <div class="ba-item">Нет SaaS-модели</div>
+          </div>
+        </div>
+        <div class="ba-box ba-after">
+          <div class="ba-label">После</div>
+          <div class="ba-items">
+            <div class="ba-item">Автоматический отчёт за 3 мин</div>
+            <div class="ba-item">Тренер — на нюансах и стратегии</div>
+            <div class="ba-item">Доступный tier от 990 ₽/разбор</div>
+            <div class="ba-item">График прогресса по записям</div>
+            <div class="ba-item">B2B подписка для команд</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="metrics-row">
+        <div class="metric">
+          <span class="metric-val">x10</span>
+          <span class="metric-label">масштаб без роста штата</span>
+        </div>
+        <div class="metric">
+          <span class="metric-val">3–4 нед</span>
+          <span class="metric-label">до первой рабочей версии</span>
+        </div>
+        <div class="metric">
+          <span class="metric-val">RU-first</span>
+          <span class="metric-label">конкурентов на рынке РФ нет</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- WHY FORGE -->
+<section class="section">
+  <div class="container">
+    <div class="eyebrow">О нас</div>
+    <h2 class="section-title">Почему Forge</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">💰</div>
+        <div class="why-title">Фиксированная цена за результат</div>
+        <div class="why-text">Не за часы. Все риски по срокам и сложности — на нас. В наших интересах сделать быстро и правильно.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🛠</div>
+        <div class="why-title">7 лет в разработке, год в AI</div>
+        <div class="why-text">Реальные интеграции, живые проекты. Последний год — фокус на AI-автоматизации для бизнеса от EdTech до корпораций.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🎯</div>
+        <div class="why-title">Под ваши системы, без замены</div>
+        <div class="why-text">Не платформа и не коробка. Строим AI-слой поверх того, что уже работает. Не нужно всё менять.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔑</div>
+        <div class="why-title">Код и данные — ваши</div>
+        <div class="why-text">Репозиторий, документация, все доступы передаём полностью. Никакой зависимости от нас после проекта.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <h2>Обсудим, с чего начать?</h2>
+      <p>60 минут — разберём задачи, выберем первую точку входа и поймём, есть ли fit. Без обязательств.</p>
+      <div class="cta-btns">
+        <a href="https://t.me/nailmardam" class="btn-orange">Написать Наилю →</a>
+        <a href="https://forge-ai.io" class="btn-ghost">forge-ai.io</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<footer class="page-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="forge-logo">Forge<span>.</span>AI</div>
+      <div class="footer-note">AI-автоматизация бизнес-процессов · 2026</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
