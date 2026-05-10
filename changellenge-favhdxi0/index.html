@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Варианты совместной работы по AI · Forge × Changellenge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #4a6da7;
+    --primary-light: #6b8ec2;
+    --primary-dark: #2f4d80;
+    --accent: #ff6b35;
+    --accent-light: #ffb3a7;
+    --bg: #ffffff;
+    --surface: #f5f7fa;
+    --surface-2: #eef2f7;
+    --text: #1a1a1a;
+    --text-muted: #666666;
+    --border: #e2e8f0;
+    --max-w: 880px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Manrope', 'Inter', sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 0.6em;
+    letter-spacing: -0.02em;
+  }
+
+  h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 800; }
+  h2 { font-size: clamp(26px, 3.5vw, 34px); }
+  h3 { font-size: clamp(20px, 2.5vw, 24px); }
+  h4 { font-size: 18px; }
+
+  p { margin: 0 0 1em; }
+
+  .container {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* HEADER */
+  .header {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: saturate(180%) blur(8px);
+    background: rgba(255, 255, 255, 0.85);
+  }
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+  .header-meta {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  /* HERO */
+  .hero {
+    padding: 80px 0 60px;
+    background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+  }
+  .hero-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    background: var(--accent-light);
+    color: var(--primary-dark);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    letter-spacing: 0.02em;
+  }
+  .hero h1 { margin-bottom: 24px; }
+  .hero h1 .accent { color: var(--accent); }
+  .hero-subtitle {
+    font-size: 19px;
+    color: var(--text-muted);
+    max-width: 720px;
+    margin: 0;
+  }
+  .hero-meta {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px 40px;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  .hero-meta b { color: var(--text); font-weight: 600; }
+
+  /* SECTIONS */
+  section { padding: 64px 0; }
+  section + section { border-top: 1px solid var(--border); }
+
+  .section-num {
+    display: inline-block;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  /* CONTEXT */
+  .context-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .context-card {
+    padding: 24px 28px;
+    background: var(--surface);
+    border-radius: 12px;
+    border-left: 3px solid var(--primary);
+  }
+  .context-card h4 {
+    margin: 0 0 8px;
+    color: var(--primary-dark);
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .context-card p { margin: 0; }
+  .context-card p + p { margin-top: 10px; }
+
+  /* OPTIONS */
+  .option {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 36px 36px 32px;
+    margin-bottom: 32px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .option::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--primary);
+  }
+  .option.recommended::before { background: var(--accent); height: 6px; }
+  .option-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .option-letter {
+    font-family: 'Manrope', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+  }
+  .option.recommended .option-letter { color: var(--accent); }
+  .option h3 {
+    margin: 0;
+    flex: 1;
+    min-width: 280px;
+  }
+  .recommended-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--accent);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .option-pitch {
+    font-size: 18px;
+    color: var(--text);
+    border-left: 3px solid var(--accent);
+    padding-left: 16px;
+    margin: 16px 0 24px;
+    font-style: italic;
+  }
+  .option-block {
+    margin-top: 22px;
+  }
+  .option-block h4 {
+    font-size: 14px;
+    color: var(--primary-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 10px;
+    font-weight: 700;
+  }
+  .option-block p { margin: 0; }
+  .option-block p + p { margin-top: 8px; }
+  .option-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .option-meta-item {
+    font-size: 14px;
+  }
+  .option-meta-item b {
+    display: block;
+    font-size: 12px;
+    color: var(--primary-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+  .option ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .option ul li {
+    margin-bottom: 6px;
+  }
+
+  /* EXTRA VECTOR */
+  .extra-vector {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 40px;
+  }
+  .extra-vector .section-num {
+    color: var(--accent-light);
+  }
+  .extra-vector h2 { color: white; margin-bottom: 16px; }
+  .extra-vector p { color: rgba(255, 255, 255, 0.9); margin-bottom: 12px; }
+  .extra-vector p:last-child { margin-bottom: 0; }
+
+  /* ROI */
+  .roi-intro {
+    font-size: 18px;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    max-width: 720px;
+  }
+  .roi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .roi-card {
+    padding: 24px;
+    background: var(--surface);
+    border-radius: 12px;
+    border-top: 3px solid var(--primary);
+  }
+  .roi-card.main { border-top-color: var(--accent); background: #fff4f0; }
+  .roi-card h4 {
+    margin: 0 0 12px;
+    color: var(--primary-dark);
+    font-size: 16px;
+  }
+  .roi-card.main h4 { color: var(--accent); }
+  .roi-card p { margin: 0 0 6px; font-size: 15px; }
+  .roi-card .label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+  .benchmarks {
+    background: var(--surface);
+    padding: 24px 28px;
+    border-radius: 12px;
+    margin-top: 24px;
+  }
+  .benchmarks h4 {
+    margin: 0 0 12px;
+    font-size: 14px;
+    color: var(--primary-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .benchmarks ul { margin: 0; padding-left: 20px; }
+  .benchmarks li { margin-bottom: 6px; }
+  .benchmarks .disclaimer {
+    margin-top: 14px;
+    font-size: 14px;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* RECOMMENDATION */
+  .rec-main {
+    padding: 32px;
+    background: linear-gradient(135deg, #fff4f0 0%, var(--surface) 100%);
+    border-radius: 16px;
+    border-left: 4px solid var(--accent);
+    margin-bottom: 24px;
+  }
+  .rec-main h3 {
+    margin: 0 0 16px;
+    color: var(--primary-dark);
+  }
+  .rec-main h3 .accent { color: var(--accent); }
+  .rec-alt {
+    padding: 24px 28px;
+    background: var(--surface);
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+  .rec-alt h4 {
+    margin: 0 0 8px;
+    color: var(--primary-dark);
+    font-size: 16px;
+  }
+  .rec-alt p { margin: 0; font-size: 15px; }
+
+  /* CTA */
+  .cta-section {
+    background: var(--text);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+  }
+  .cta-section .section-num { color: var(--accent-light); }
+  .cta-section h2 { color: white; margin-bottom: 16px; }
+  .cta-section p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 18px;
+    margin-bottom: 32px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 16px;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .cta-meta {
+    margin-top: 28px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+  }
+
+  /* FOOTER */
+  .footer {
+    padding: 32px 0;
+    background: var(--text);
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .footer a { color: rgba(255, 255, 255, 0.7); text-decoration: none; }
+  .footer a:hover { color: var(--accent-light); }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    section { padding: 48px 0; }
+    .hero { padding: 56px 0 40px; }
+    .option { padding: 28px 24px 24px; }
+    .option-letter { font-size: 36px; }
+    .extra-vector, .rec-main { padding: 28px 24px; }
+    .header-meta { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container header-inner">
+    <a href="https://forge-ai.io" class="logo" target="_blank" rel="noopener">Forge<span>.</span></a>
+    <div class="header-meta">Для Кристины Малышевой · Changellenge · 10.05.2026</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-tag">Развилка · Не КП</div>
+    <h1>Варианты совместной работы по&nbsp;<span class="accent">AI в Changellenge</span></h1>
+    <p class="hero-subtitle">Кристина, по итогам нашего разговора 20 апреля и переписки на этой неделе — собрала варианты, как мы можем работать вместе. Это не КП, а развилка: ниже три направления и один вектор «на вырост». Дальше выбираем одно (или комбинацию) и упаковываем в полноценное предложение с финальными цифрами и сроками.</p>
+    <div class="hero-meta">
+      <span><b>3 варианта</b> · A, B, C</span>
+      <span><b>+ доп. вектор</b> на 3-6 месяцев</span>
+      <span><b>Следующий шаг:</b> созвон 14-15 мая</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-num">01 · Контекст</div>
+    <h2>Что я понял из нашего разговора</h2>
+
+    <div class="context-grid">
+      <div class="context-card">
+        <h4>Где вы сейчас</h4>
+        <p>AI в компании уже есть и местами работает: ChatGPT под несколько подразделений, Claude Pro на управленческой команде (активно — три человека из девяти), внутренний ассистент на n8n + Supabase, скрининг и follow-up'ы на связке make + Airtable + Fireflies, B2C-карьерный ассистент на сайте.</p>
+        <p>Точечные кейсы дают результат, но твоей же фразой — «суперразрозненно, не масштабируется».</p>
+      </div>
+
+      <div class="context-card">
+        <h4>Куда вы целитесь</h4>
+        <p>Главная метрика 2026 — выручка на человека через рост capacity, не сокращение штата. Видение: внедрять не на уровне людей, а на уровне системы — «не AI прикладываем к людям, а людей прикладываем к AI-процессу». Это правильная рамка, и под неё мы и собирали варианты ниже.</p>
+      </div>
+
+      <div class="context-card">
+        <h4>Что вы уже выбрали внутри</h4>
+        <p>После сессии 22.04 ваша команда взяла узкий фокус — «Продажа и передача проекта в работу = AI Native на 80%»: КП, презентации, СУ, итоги встреч, первичный бриф, передача в PM. Это вы делаете сами — и это правильно, у задачи есть владелец и контекст внутри.</p>
+        <p>Мы в эту реализацию не лезем, но один из вариантов ниже — это как мы можем быть вам полезны рядом с ней, не отбирая её у вас.</p>
+      </div>
+
+      <div class="context-card">
+        <h4>Что мешает делать всё сразу</h4>
+        <p>Боян в отпуске. Для системной AI-стратегии его участие критично — он один из ключевых пользователей и носителей контекста по Клоду. Поэтому варианты ниже устроены так, чтобы стартовать можно было до его возвращения, не теряя на этом качества.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-num">02 · Развилка</div>
+    <h2>Три варианта совместной работы</h2>
+    <p style="color: var(--text-muted); font-size: 17px; margin-bottom: 36px; max-width: 720px;">Все три можно делать по отдельности или комбинировать. После выбора — финализируем скоуп и стоимость отдельным предложением.</p>
+
+    <!-- VARIANT A -->
+    <div class="option recommended">
+      <div class="option-header">
+        <div class="option-letter">A</div>
+        <h3>Консультант по AI Native 80%</h3>
+        <span class="recommended-badge">Рекомендуем</span>
+      </div>
+      <div class="option-pitch">Лёгкий способ работать вместе уже сейчас, без больших обязательств. Я смотрю свежим взглядом то, что делает ваша команда, и помогаю избежать типичных ошибок на ранних этапах.</div>
+
+      <div class="option-block">
+        <h4>Что делаем</h4>
+        <p>Знакомлюсь с тем, что собрала ваша команда внутри по «AI Native 80%». Дальше — серия часовых-двухчасовых сессий по мере вашей готовности (раз в одну-две недели). На каждой разбираем: что сделано, критикую промпты и архитектуру, подсвечиваю риски, предлагаю следующие шаги. Между сессиями доступен в Telegram для коротких вопросов.</p>
+      </div>
+
+      <div class="option-block">
+        <h4>Зачем это вам</h4>
+        <p>Сократить риск, что внутренняя реализация уйдёт в тупик через месяц и придётся переделывать. Получить взгляд практиков, которые работают в Claude Code ежедневно и держат собственные AI-системы в production. Без обязательств с обеих сторон — попробовать формат сотрудничества прежде чем заходить в крупный проект.</p>
+      </div>
+
+      <div class="option-meta">
+        <div class="option-meta-item"><b>Длительность</b>1-2 месяца</div>
+        <div class="option-meta-item"><b>Формат</b>2-4 онлайн-сессии по 1-2 часа</div>
+        <div class="option-meta-item"><b>Когда стартуем</b>Хоть сейчас</div>
+        <div class="option-meta-item"><b>Цена</b>Вилка на этапе согласования</div>
+      </div>
+    </div>
+
+    <!-- VARIANT B -->
+    <div class="option">
+      <div class="option-header">
+        <div class="option-letter">B</div>
+        <h3>Диагностика AI-зрелости компании</h3>
+      </div>
+      <div class="option-pitch">Системная карта где у вас сейчас можно и нужно AI — с приоритизацией. Чтобы следующее внедрение было обоснованным, а не интуитивным.</div>
+
+      <div class="option-block">
+        <h4>Что делаем · Неделя 1 — сбор контекста</h4>
+        <p>5-7 интервью: ты, Боян (когда вернётся), Андрей, лидеры юнитов (Graduates, Employer Branding, L&amp;D), ключевые PM. Карта текущих процессов и продуктов. Аудит существующего AI-стэка: что работает, где дыры. Анализ конкурентов в EdTech и HR Tech.</p>
+      </div>
+
+      <div class="option-block">
+        <h4>Что делаем · Неделя 2 — анализ и приоритизация</h4>
+        <p>AI Opportunity Map в трёх слоях: операционная эффективность, продуктовые возможности, стратегические рычаги. Приоритизация через impact × effort. Рекомендация 3-5 пилотов с разбивкой по скоупу.</p>
+      </div>
+
+      <div class="option-block">
+        <h4>Зачем это вам</h4>
+        <p>Снять главную боль, которую ты на разговоре сформулировала через типичный паттерн: «приходишь к эксперту, тебя спрашивают — а где? а ты — а где можно?». То есть знаем что «где-то можно», но конкретно где именно — нет. После аудита у вас появляется этот ответ. Плюс общий язык внутри управленческой команды — дальше любой пилот идёт предметно, с обоснованием для Андрея.</p>
+      </div>
+
+      <div class="option-meta">
+        <div class="option-meta-item"><b>Длительность</b>2 недели</div>
+        <div class="option-meta-item"><b>Участие команды</b>5-7 интервью × 45-60 мин</div>
+        <div class="option-meta-item"><b>На выходе</b>Документ 15-20 стр. + презентация + 3-5 пилотов</div>
+        <div class="option-meta-item"><b>Цена</b>Вилка на этапе согласования</div>
+      </div>
+    </div>
+
+    <!-- VARIANT C -->
+    <div class="option recommended">
+      <div class="option-header">
+        <div class="option-letter">C</div>
+        <h3>Прокачка управленческой команды до AI-natives</h3>
+        <span class="recommended-badge">Рекомендуем</span>
+      </div>
+      <div class="option-pitch">5 недель практикума на ваших реальных задачах. На выходе — управленческая команда, которая использует Claude Code в ежедневной работе, плюс карта применения AI в ваших процессах изнутри.</div>
+
+      <div class="option-block">
+        <h4>Что делаем · Неделя 0 — подготовка</h4>
+        <p>Короткие интервью с каждым участником (15-20 минут): какие задачи болят, что уже пробовал. Персональный план для каждого. Установка окружения, доступы.</p>
+      </div>
+
+      <div class="option-block">
+        <h4>Что делаем · Недели 1-4 — практикум</h4>
+        <p>Индивидуальные сессии по 60 минут × 3-4 встречи с каждым топом — на их реальных задачах: автоматизация отчётов, работа с документами, аналитика, клиентская коммуникация. Групповые воркшопы — 2-3 штуки по 90 минут со всей командой: разбор кейсов, обмен находками, общие приёмы. Telegram-чат для поддержки между сессиями.</p>
+      </div>
+
+      <div class="option-block">
+        <h4>Что делаем · Неделя 5 — закрытие</h4>
+        <p>Финальная сессия: каждый показывает что освоил и приносит свой AI-кейс из работы. Итоговый документ-карта «что работает + потенциальные следующие проекты внутри компании».</p>
+      </div>
+
+      <div class="option-block">
+        <h4>Зачем это вам</h4>
+        <p>Выйти из «3 из 9 пользуются Клодом, 1 погружён» в «вся команда — AI-natives». Через обучение получить внутренний discovery — точки применения видны изнутри глазами тех, кто живёт в процессах. Каскад в юниты: топы становятся внутренними евангелистами, дальше команды подтягиваются органически — это и есть подход, к которому ты склонялась («микс топ + амбассадоры юнитов»).</p>
+      </div>
+
+      <div class="option-meta">
+        <div class="option-meta-item"><b>Длительность</b>5 недель</div>
+        <div class="option-meta-item"><b>Участники</b>5-9 топов</div>
+        <div class="option-meta-item"><b>Объём</b>27-36 часов сессий + материалы + 1 мес поддержки</div>
+        <div class="option-meta-item"><b>Цена</b>Вилка на этапе согласования</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="extra-vector">
+      <div class="section-num">03 · Доп. вектор</div>
+      <h2>Системная интеграция</h2>
+      <p>Как только мы пройдём через 1-2 совместных проекта, появляется возможность зайти в системный формат — программа на 3-6 месяцев, где AI становится сквозным слоем компании. Несколько процессов автоматизированы, единый слой данных, AI-оркестратор связывает всё, команда обучена пользоваться. Это не стартовый формат: он требует доверия, проверенных пилотов внутри и плотного вовлечения Андрея и Бояна.</p>
+      <p>Упоминаем как вектор, чтобы было понятно куда мы можем вырасти. Цифры и скоуп — после того, как пройдём первый этап и появится база для разговора.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-num">04 · ROI-фрейм</div>
+    <h2>Логика оценки эффекта</h2>
+    <p class="roi-intro">Без ваших данных точную сумму экономии не посчитать — и обещать её до старта было бы нечестно. Поэтому ниже не цифра, а логика расчёта в твоих же терминах: capacity и выручка на человека.</p>
+
+    <div class="roi-grid">
+      <div class="roi-card main">
+        <span class="label">Уровень 1</span>
+        <h4>Capacity</h4>
+        <p><b>До:</b> сколько часов человек тратит на задачу.</p>
+        <p><b>После:</b> сколько освобождается.</p>
+        <p><b>Перевод:</b> освобождённое время × часовая ставка → рост выручки на человека.</p>
+      </div>
+      <div class="roi-card">
+        <span class="label">Уровень 2</span>
+        <h4>Скорость</h4>
+        <p><b>До:</b> сколько проходит от запроса до результата.</p>
+        <p><b>После:</b> target.</p>
+        <p><b>Перевод:</b> ускорение цикла → больше сделок тем же составом без расширения команды.</p>
+      </div>
+      <div class="roi-card">
+        <span class="label">Уровень 3</span>
+        <h4>Качество</h4>
+        <p><b>До:</b> процент ошибок, переделок, потерь.</p>
+        <p><b>После:</b> процент после внедрения.</p>
+        <p><b>Перевод:</b> снижение операционных потерь и рисков.</p>
+      </div>
+    </div>
+
+    <div class="benchmarks">
+      <h4>Типовые бенчмарки рынка — для ориентировки, не обещание</h4>
+      <ul>
+        <li><b>Документооборот:</b> 60-80% сокращение времени на типовую операцию.</li>
+        <li><b>Аналитика и отчётность:</b> 40-60% сокращение времени подготовки отчёта.</li>
+        <li><b>Контент</b> (КП, презентации, материалы): 3-5х ускорение производства черновика.</li>
+      </ul>
+      <p class="disclaimer">После выбора направления — на отдельной discovery-сессии собираем ваши конкретные цифры (часы по задачам, ставки, объёмы) и считаем эффект уже точно, в рублях и в выручке на человека. Эту секцию финализированных цифр всегда отдаём до старта работ, не задним числом.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-num">05 · Рекомендация</div>
+    <h2>Как лучше начать</h2>
+
+    <div class="rec-main">
+      <h3>Предварительно — <span class="accent">A + C параллельно</span></h3>
+      <p><b>A</b> — лёгкий вход. Решает вашу текущую задачу (AI Native 80%) и снижает риск тупика в реализации, которую делает ваша команда. Не требует Бояна, можем стартовать сейчас.</p>
+      <p><b>C</b> — фундамент для всего, что будет дальше. Прокачка управленческой команды одновременно решает три задачи: вывод вашей AI-зрелости на новый уровень, внутренний discovery в формате, на который не способен любой внешний аудит, и подготовка топов как евангелистов в свои юниты.</p>
+      <p style="margin-top: 14px;">Эта пара не зависит от возвращения Бояна и параллельно даёт вам две вещи — быструю отдачу (A) и системный сдвиг (C).</p>
+    </div>
+
+    <div class="rec-alt">
+      <h4>Альтернатива — A + B</h4>
+      <p>Подходит, если для вас сейчас важнее системная картина, чем сразу шаг в действие. Минус — для качественного B нужен Боян, и часть работы откладывается до его возвращения.</p>
+    </div>
+
+    <div class="rec-alt">
+      <h4>Минимальный сценарий — только A</h4>
+      <p>Это хороший способ попробовать формат, прежде чем заходить во что-то крупное.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <div class="section-num">06 · Следующий шаг</div>
+    <h2>Созвон на 30 минут — выбираем направление</h2>
+    <p>У меня свободно <b>14-15 мая</b>. После выбора детально оформим в полное предложение с финальными цифрами, сроками и составом работ.</p>
+    <div class="cta-buttons">
+      <a href="https://t.me/nailmardamshin" class="btn btn-primary" target="_blank" rel="noopener">Написать в Telegram</a>
+      <a href="mailto:nail.mardamshin@gmail.com" class="btn btn-secondary">Email</a>
+    </div>
+    <div class="cta-meta">Если по дороге появятся вопросы или захочешь обсудить раньше — пиши, доступен.</div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <a href="https://forge-ai.io" target="_blank" rel="noopener">forge-ai.io</a> · Внедрение AI в бизнес-процессы · Документ для Кристины Малышевой
+  </div>
+</footer>
+
+</body>
+</html>
