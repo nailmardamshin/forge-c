@@ -130,6 +130,56 @@
   }
   .hero-meta b { color: var(--text); font-weight: 600; }
 
+  /* TL;DR cards in hero */
+  .tldr {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .tldr-card {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 18px 20px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+  }
+  .tldr-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 20px rgba(74, 109, 167, 0.08);
+  }
+  .tldr-letter {
+    font-family: 'Space Grotesk', 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--primary);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .tldr-card:nth-child(1) .tldr-letter,
+  .tldr-card:nth-child(3) .tldr-letter { color: var(--accent); }
+  .tldr-name {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.3;
+    margin-top: 4px;
+  }
+  .tldr-meta {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* Anchor scroll offset (sticky header compensation) */
+  #var-a, #var-b, #var-c, #recommendation, #cta { scroll-margin-top: 80px; }
+
   /* SECTIONS */
   section { padding: 64px 0; }
   section + section { border-top: 1px solid var(--border); }
@@ -350,18 +400,110 @@
     color: var(--primary-dark);
   }
   .rec-main h3 .accent { color: var(--accent); }
-  .rec-alt {
-    padding: 24px 28px;
+  .rec-axis {
+    padding: 28px;
     background: var(--surface);
     border-radius: 12px;
-    margin-bottom: 16px;
+    margin-top: 20px;
   }
-  .rec-alt h4 {
-    margin: 0 0 8px;
+  .rec-axis h4 {
+    margin: 0 0 16px;
     color: var(--primary-dark);
-    font-size: 16px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
   }
-  .rec-alt p { margin: 0; font-size: 15px; }
+  .rec-axis ul {
+    margin: 0;
+    padding-left: 22px;
+  }
+  .rec-axis li {
+    font-size: 16px;
+    margin-bottom: 10px;
+    line-height: 1.55;
+  }
+  .rec-axis li:last-child { margin-bottom: 0; }
+  .rec-axis b { color: var(--primary-dark); }
+
+  /* Lighter H4 inside option cards — less competition with pitch */
+  .option-block h4 {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+
+  /* Stronger pitch — should out-weigh subheaders */
+  .option-pitch {
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--text);
+    border-left: 4px solid var(--accent);
+    padding-left: 18px;
+    margin: 16px 0 28px;
+  }
+
+  /* Sticky mini-nav (appears after hero) */
+  .stickynav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid var(--border);
+    z-index: 20;
+    transform: translateY(-100%);
+    transition: transform 0.25s ease;
+    padding: 12px 0;
+  }
+  .stickynav.visible { transform: translateY(0); }
+  .stickynav-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    align-items: center;
+    -webkit-overflow-scrolling: touch;
+  }
+  .stickynav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+  }
+  .stickynav a:hover {
+    background: var(--surface);
+    color: var(--text);
+  }
+  .stickynav a b {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--primary);
+    font-weight: 700;
+  }
+  .stickynav a.cta-link {
+    margin-left: auto;
+    background: var(--accent);
+    color: white;
+  }
+  .stickynav a.cta-link:hover {
+    background: #e85a26;
+    color: white;
+  }
 
   /* CTA */
   .cta-section {
@@ -436,29 +578,60 @@
     .hero { padding: 56px 0 40px; }
     .option { padding: 28px 24px 24px; }
     .option-letter { font-size: 36px; }
-    .extra-vector, .rec-main { padding: 28px 24px; }
+    .option-pitch { font-size: 17px; padding-left: 14px; }
+    .extra-vector, .rec-main, .rec-axis { padding: 28px 24px; }
     .header-meta { display: none; }
+    .tldr {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .stickynav-inner { padding: 0 16px; }
+    .stickynav a { padding: 7px 10px; font-size: 13px; }
   }
 </style>
 </head>
 <body>
 
+<nav class="stickynav" id="stickynav" aria-hidden="true">
+  <div class="stickynav-inner">
+    <a href="#var-a"><b>A</b> AI Native 80%</a>
+    <a href="#var-b"><b>B</b> Диагностика</a>
+    <a href="#var-c"><b>C</b> Прокачка топов</a>
+    <a href="#recommendation">Рекомендация</a>
+    <a href="#cta" class="cta-link">Созвон →</a>
+  </div>
+</nav>
+
 <header class="header">
   <div class="container header-inner">
     <a href="https://forge-ai.io" class="logo" target="_blank" rel="noopener">Forge<span class="dot">.</span></a>
-    <div class="header-meta">Для Кристины Малышевой · Changellenge · 10.05.2026</div>
+    <div class="header-meta">Для Кристины · Май 2026</div>
   </div>
 </header>
 
 <section class="hero">
   <div class="container">
-    <div class="hero-tag">Развилка · Не КП</div>
-    <h1>Варианты совместной работы по&nbsp;<span class="accent">AI в Changellenge</span></h1>
-    <p class="hero-subtitle">Кристина, по итогам нашего разговора 20 апреля и переписки на этой неделе — собрала варианты, как мы можем работать вместе. Это не КП, а развилка: ниже три направления и один вектор «на вырост». Дальше выбираем одно (или комбинацию) и упаковываем в полноценное предложение с финальными цифрами и сроками.</p>
-    <div class="hero-meta">
-      <span><b>3 варианта</b> · A, B, C</span>
-      <span><b>+ доп. вектор</b> на 3-6 месяцев</span>
-      <span><b>Следующий шаг:</b> созвон 14-15 мая</span>
+    <div class="hero-tag">Развилка · 3 варианта + рекомендация</div>
+    <h1>AI на уровне системы, а не точечных кейсов.<br><span class="accent">Три точки входа.</span></h1>
+    <p class="hero-subtitle">По итогам нашего разговора 20 апреля. Три формата работы, моя рекомендация, следующий шаг. ~5 минут чтения.</p>
+
+    <div class="tldr">
+      <a href="#var-a" class="tldr-card">
+        <span class="tldr-letter">A</span>
+        <span class="tldr-name">Консультант по AI Native 80%</span>
+        <span class="tldr-meta">1-2 месяца · лёгкий старт</span>
+      </a>
+      <a href="#var-b" class="tldr-card">
+        <span class="tldr-letter">B</span>
+        <span class="tldr-name">Диагностика AI-зрелости</span>
+        <span class="tldr-meta">2 недели · системная картина</span>
+      </a>
+      <a href="#var-c" class="tldr-card">
+        <span class="tldr-letter">C</span>
+        <span class="tldr-name">Прокачка топов до AI-natives</span>
+        <span class="tldr-meta">5 недель · фундамент + discovery</span>
+      </a>
     </div>
   </div>
 </section>
@@ -482,13 +655,13 @@
 
       <div class="context-card">
         <h4>Что вы уже выбрали внутри</h4>
-        <p>После сессии 22.04 ваша команда взяла узкий фокус — «Продажа и передача проекта в работу = AI Native на 80%»: КП, презентации, СУ, итоги встреч, первичный бриф, передача в PM. Это вы делаете сами — и это правильно, у задачи есть владелец и контекст внутри.</p>
+        <p>После сессии 22.04 ваша команда взяла узкий фокус — «Продажа и передача проекта в работу = AI Native на 80%»: КП, презентации, СУ, итоги встреч, первичный бриф, передача в PM. Это вы делаете сами — задача с владельцем и контекстом внутри.</p>
         <p>Мы в эту реализацию не лезем, но один из вариантов ниже — это как мы можем быть вам полезны рядом с ней, не отбирая её у вас.</p>
       </div>
 
       <div class="context-card">
         <h4>Что мешает делать всё сразу</h4>
-        <p>Боян в отпуске. Для системной AI-стратегии его участие критично — он один из ключевых пользователей и носителей контекста по Клоду. Поэтому варианты ниже устроены так, чтобы стартовать можно было до его возвращения, не теряя на этом качества.</p>
+        <p>Один из ключевых носителей AI-контекста сейчас в отпуске. Для системного трека его участие критично — поэтому варианты ниже устроены так, чтобы стартовать можно было сейчас, не теряя в качестве.</p>
       </div>
     </div>
   </div>
@@ -498,16 +671,16 @@
   <div class="container">
     <div class="section-num">02 · Развилка</div>
     <h2>Три варианта совместной работы</h2>
-    <p style="color: var(--text-muted); font-size: 17px; margin-bottom: 36px; max-width: 720px;">Все три можно делать по отдельности или комбинировать. После выбора — финализируем скоуп и стоимость отдельным предложением.</p>
+    <p style="color: var(--text-muted); font-size: 17px; margin-bottom: 36px; max-width: 720px;">Три формата. Можно по отдельности, можно в паре. Дальше — финальный скоуп и цифры в полном предложении.</p>
 
     <!-- VARIANT A -->
-    <div class="option recommended">
+    <div class="option recommended" id="var-a">
       <div class="option-header">
         <div class="option-letter">A</div>
         <h3>Консультант по AI Native 80%</h3>
         <span class="recommended-badge">Рекомендуем</span>
       </div>
-      <div class="option-pitch">Лёгкий способ работать вместе уже сейчас, без больших обязательств. Я смотрю свежим взглядом то, что делает ваша команда, и помогаю избежать типичных ошибок на ранних этапах.</div>
+      <div class="option-pitch">Час в две недели — и слабые места реализации AI Native 80% видны до запуска. Формат для проверки совместимости без крупного проекта.</div>
 
       <div class="option-block">
         <h4>Что делаем</h4>
@@ -528,12 +701,12 @@
     </div>
 
     <!-- VARIANT B -->
-    <div class="option">
+    <div class="option" id="var-b">
       <div class="option-header">
         <div class="option-letter">B</div>
         <h3>Диагностика AI-зрелости компании</h3>
       </div>
-      <div class="option-pitch">Системная карта где у вас сейчас можно и нужно AI — с приоритизацией. Чтобы следующее внедрение было обоснованным, а не интуитивным.</div>
+      <div class="option-pitch">Две недели интервью и анализа → AI Opportunity Map с приоритизацией пилотов. Чтобы каждое следующее внедрение защищало само себя цифрами, а не верой.</div>
 
       <div class="option-block">
         <h4>Что делаем · Неделя 1 — сбор контекста</h4>
@@ -559,13 +732,13 @@
     </div>
 
     <!-- VARIANT C -->
-    <div class="option recommended">
+    <div class="option recommended" id="var-c">
       <div class="option-header">
         <div class="option-letter">C</div>
         <h3>Прокачка управленческой команды до AI-natives</h3>
         <span class="recommended-badge">Рекомендуем</span>
       </div>
-      <div class="option-pitch">5 недель практикума на ваших реальных задачах. На выходе — управленческая команда, которая использует Claude Code в ежедневной работе, плюс карта применения AI в ваших процессах изнутри.</div>
+      <div class="option-pitch">5 недель работы топов на их собственных задачах. На выходе — команда, для которой Claude рабочий инструмент, и карта точек применения AI, увиденная изнутри вашими же людьми.</div>
 
       <div class="option-block">
         <h4>Что делаем · Неделя 0 — подготовка</h4>
@@ -642,7 +815,6 @@
       <h4>Типовые бенчмарки рынка — для ориентировки, не обещание</h4>
       <ul>
         <li><b>Документооборот:</b> 60-80% сокращение времени на типовую операцию.</li>
-        <li><b>Аналитика и отчётность:</b> 40-60% сокращение времени подготовки отчёта.</li>
         <li><b>Контент</b> (КП, презентации, материалы): 3-5х ускорение производства черновика.</li>
       </ul>
       <p class="disclaimer">После выбора направления — на отдельной discovery-сессии собираем ваши конкретные цифры (часы по задачам, ставки, объёмы) и считаем эффект уже точно, в рублях и в выручке на человека. Эту секцию финализированных цифр всегда отдаём до старта работ, не задним числом.</p>
@@ -650,48 +822,67 @@
   </div>
 </section>
 
-<section>
+<section id="recommendation">
   <div class="container">
     <div class="section-num">05 · Рекомендация</div>
     <h2>Как лучше начать</h2>
 
     <div class="rec-main">
       <h3>Предварительно — <span class="accent">A + C параллельно</span></h3>
-      <p><b>A</b> — лёгкий вход. Решает вашу текущую задачу (AI Native 80%) и снижает риск тупика в реализации, которую делает ваша команда. Не требует Бояна, можем стартовать сейчас.</p>
+      <p><b>A</b> — лёгкий вход. Решает вашу текущую задачу (AI Native 80%) и снижает риск тупика в реализации, которую делает ваша команда.</p>
       <p><b>C</b> — фундамент для всего, что будет дальше. Прокачка управленческой команды одновременно решает три задачи: вывод вашей AI-зрелости на новый уровень, внутренний discovery в формате, на который не способен любой внешний аудит, и подготовка топов как евангелистов в свои юниты.</p>
-      <p style="margin-top: 14px;">Эта пара не зависит от возвращения Бояна и параллельно даёт вам две вещи — быструю отдачу (A) и системный сдвиг (C).</p>
+      <p style="margin-top: 14px;">Можем стартовать без ожидания возвращения ключевого контакта по AI — его участие добавляем по мере доступности. Параллельно даёт вам две вещи — быструю отдачу (A) и системный сдвиг (C).</p>
     </div>
 
-    <div class="rec-alt">
-      <h4>Альтернатива — A + B</h4>
-      <p>Подходит, если для вас сейчас важнее системная картина, чем сразу шаг в действие. Минус — для качественного B нужен Боян, и часть работы откладывается до его возвращения.</p>
-    </div>
-
-    <div class="rec-alt">
-      <h4>Минимальный сценарий — только A</h4>
-      <p>Это хороший способ попробовать формат, прежде чем заходить во что-то крупное.</p>
+    <div class="rec-axis">
+      <h4>Как выбирать между парами</h4>
+      <ul>
+        <li><b>A + C</b> — если приоритет: быстро снизить риск тупика в текущей реализации + параллельно построить фундамент для всего, что будет дальше.</li>
+        <li><b>A + B</b> — если приоритет: получить системную картину прежде, чем заходить в крупный проект (часть работы B стартует сразу, часть — по возвращении ключевого контакта).</li>
+        <li><b>Только A</b> — если приоритет: минимально проверить формат совместной работы.</li>
+      </ul>
     </div>
   </div>
 </section>
 
-<section class="cta-section">
+<section class="cta-section" id="cta">
   <div class="container">
     <div class="section-num">06 · Следующий шаг</div>
-    <h2>Созвон на 30 минут — выбираем направление</h2>
-    <p>У меня свободно <b>14-15 мая</b>. После выбора детально оформим в полное предложение с финальными цифрами, сроками и составом работ.</p>
+    <h2>Полчаса видеозвонка — и выбираем направление</h2>
+    <p>Свободные слоты — <b>14-15 мая</b>. После выбора собираем твои цифры на коротком discovery и оформляем в полное предложение — нечестно называть цену до объёма.</p>
     <div class="cta-buttons">
       <a href="https://t.me/nailmardamshin" class="btn btn-primary" target="_blank" rel="noopener">Написать в Telegram</a>
       <a href="mailto:nail.mardamshin@gmail.com" class="btn btn-secondary">Email</a>
     </div>
-    <div class="cta-meta">Если по дороге появятся вопросы или захочешь обсудить раньше — пиши, доступен.</div>
+    <div class="cta-meta">Если по дороге появятся вопросы — пиши, доступен.</div>
   </div>
 </section>
 
 <footer class="footer">
   <div class="container">
-    <a href="https://forge-ai.io" target="_blank" rel="noopener">forge-ai.io</a> · Внедрение AI в бизнес-процессы · Документ для Кристины Малышевой
+    <a href="https://forge-ai.io" target="_blank" rel="noopener">forge-ai.io</a> · Внедрение AI в бизнес-процессы
   </div>
 </footer>
+
+<script>
+  (function() {
+    var nav = document.getElementById('stickynav');
+    var hero = document.querySelector('.hero');
+    if (!nav || !hero) return;
+    function update() {
+      var rect = hero.getBoundingClientRect();
+      if (rect.bottom < 0) {
+        nav.classList.add('visible');
+        nav.setAttribute('aria-hidden', 'false');
+      } else {
+        nav.classList.remove('visible');
+        nav.setAttribute('aria-hidden', 'true');
+      }
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+</script>
 
 </body>
 </html>
