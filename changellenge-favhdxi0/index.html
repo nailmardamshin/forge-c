@@ -4,7 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Варианты совместной работы по AI · Forge × Changellenge</title>
+<title>AI-стратегия для Changellenge — три точки входа</title>
+<meta property="og:title" content="AI-стратегия для Changellenge — три точки входа">
+<meta property="og:description" content="Три формата работы по AI-интеграции, рекомендация и следующий шаг. От Forge.">
+<meta property="og:type" content="article">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
@@ -448,6 +451,27 @@
     margin: 16px 0 28px;
   }
 
+  /* Bridge between variants section and recommendation */
+  .bridge {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 16px;
+    padding: 14px 22px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--primary-dark);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: border-color 0.15s, color 0.15s, transform 0.15s;
+  }
+  .bridge:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateX(3px);
+  }
+
   /* Sticky mini-nav (appears after hero) */
   .stickynav {
     position: fixed;
@@ -595,9 +619,9 @@
 
 <nav class="stickynav" id="stickynav" aria-hidden="true">
   <div class="stickynav-inner">
-    <a href="#var-a"><b>A</b> AI Native 80%</a>
+    <a href="#var-a"><b>A</b> Консультант</a>
     <a href="#var-b"><b>B</b> Диагностика</a>
-    <a href="#var-c"><b>C</b> Прокачка топов</a>
+    <a href="#var-c"><b>C</b> Обучение</a>
     <a href="#recommendation">Рекомендация</a>
     <a href="#cta" class="cta-link">Созвон →</a>
   </div>
@@ -614,7 +638,7 @@
   <div class="container">
     <div class="hero-tag">Развилка · 3 варианта + рекомендация</div>
     <h1>AI на уровне системы, а не точечных кейсов.<br><span class="accent">Три точки входа.</span></h1>
-    <p class="hero-subtitle">По итогам нашего разговора 20 апреля. Три формата работы, моя рекомендация, следующий шаг. ~5 минут чтения.</p>
+    <p class="hero-subtitle">Ты говорила про «людей к AI-процессу, а не AI к людям». Под эту рамку — три формата работы, моя рекомендация и следующий шаг. ~5 минут чтения.</p>
 
     <div class="tldr">
       <a href="#var-a" class="tldr-card">
@@ -738,7 +762,7 @@
         <h3>Прокачка управленческой команды до AI-natives</h3>
         <span class="recommended-badge">Рекомендуем</span>
       </div>
-      <div class="option-pitch">5 недель работы топов на их собственных задачах. На выходе — команда, для которой Claude рабочий инструмент, и карта точек применения AI, увиденная изнутри вашими же людьми.</div>
+      <div class="option-pitch">5 недель — и топы не просто пользуются Claude, а перестраивают под него свои процессы. Внутренний discovery идёт как побочный продукт — тот, на который не способен любой внешний аудит.</div>
 
       <div class="option-block">
         <h4>Что делаем · Неделя 0 — подготовка</h4>
@@ -767,6 +791,8 @@
         <div class="option-meta-item"><b>Цена</b>Вилка на этапе согласования</div>
       </div>
     </div>
+
+    <a href="#recommendation" class="bridge">Все три рядом? Моя рекомендация ниже →</a>
   </div>
 </section>
 
