@@ -7,7 +7,7 @@
 <title>Варианты совместной работы по AI · Forge × Changellenge</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
 <style>
   :root {
     --primary: #4a6da7;
@@ -75,14 +75,20 @@
     align-items: center;
   }
   .logo {
-    font-family: 'Manrope', sans-serif;
-    font-weight: 800;
-    font-size: 18px;
-    letter-spacing: -0.02em;
+    font-family: 'Space Grotesk', 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: -0.04em;
     color: var(--text);
     text-decoration: none;
+    line-height: 1;
+    display: inline-flex;
+    align-items: baseline;
   }
-  .logo span { color: var(--accent); }
+  .logo .dot {
+    color: var(--accent);
+    margin-left: 1px;
+  }
   .header-meta {
     font-size: 14px;
     color: var(--text-muted);
@@ -439,7 +445,7 @@
 
 <header class="header">
   <div class="container header-inner">
-    <a href="https://forge-ai.io" class="logo" target="_blank" rel="noopener">Forge<span>.</span></a>
+    <a href="https://forge-ai.io" class="logo" target="_blank" rel="noopener">Forge<span class="dot">.</span></a>
     <div class="header-meta">Для Кристины Малышевой · Changellenge · 10.05.2026</div>
   </div>
 </header>
