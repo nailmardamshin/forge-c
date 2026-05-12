@@ -80,17 +80,16 @@
   .logo {
     font-family: 'Space Grotesk', 'Manrope', sans-serif;
     font-weight: 700;
-    font-size: 24px;
-    letter-spacing: -0.04em;
+    font-size: 22px;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
     color: var(--text);
     text-decoration: none;
     line-height: 1;
-    display: inline-flex;
-    align-items: baseline;
+    display: inline-block;
   }
-  .logo .dot {
+  .logo .f {
     color: #F97316;
-    margin-left: 1px;
   }
   .header-meta {
     font-size: 14px;
@@ -634,20 +633,17 @@
     color: white;
   }
 
-  /* CTA — Forge orange */
+  /* CTA */
   .cta-section {
-    background: #F97316;
+    background: var(--text);
     color: white;
     padding: 80px 0;
     text-align: center;
   }
-  .cta-section .section-num {
-    color: white;
-    opacity: 0.85;
-  }
+  .cta-section .section-num { color: var(--accent-light); }
   .cta-section h2 { color: white; margin-bottom: 16px; }
   .cta-section p {
-    color: rgba(255, 255, 255, 0.92);
+    color: rgba(255, 255, 255, 0.85);
     font-size: 18px;
     margin-bottom: 32px;
     max-width: 600px;
@@ -670,48 +666,30 @@
     transition: transform 0.15s, box-shadow 0.15s;
   }
   .btn-primary {
-    background: #121217;
+    background: var(--accent);
     color: white;
   }
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 10px 25px rgba(189, 12, 30, 0.3);
   }
   .cta-meta {
     margin-top: 28px;
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.6);
     font-size: 14px;
   }
 
   /* FOOTER */
   .footer {
-    padding: 40px 0 36px;
+    padding: 32px 0;
     background: var(--text);
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.5);
     font-size: 13px;
     text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
-  .footer-logo {
-    display: inline-block;
-    font-family: 'Space Grotesk', 'Manrope', sans-serif;
-    font-weight: 700;
-    font-size: 26px;
-    letter-spacing: -0.03em;
-    text-transform: uppercase;
-    color: #ffffff;
-    text-decoration: none;
-    line-height: 1;
-    margin-bottom: 12px;
-  }
-  .footer-logo .f { color: #F97316; }
-  .footer-tagline {
-    color: rgba(255, 255, 255, 0.55);
-    font-size: 13px;
-    letter-spacing: 0.02em;
-  }
-  .footer-tagline a { color: rgba(255, 255, 255, 0.75); text-decoration: none; }
-  .footer-tagline a:hover { color: #F97316; }
+  .footer a { color: rgba(255, 255, 255, 0.7); text-decoration: none; }
+  .footer a:hover { color: var(--accent-light); }
 
   /* MOBILE */
   @media (max-width: 640px) {
@@ -747,7 +725,7 @@
 
 <header class="header">
   <div class="container header-inner">
-    <a href="https://forge-ai.io" class="logo" target="_blank" rel="noopener">Forge<span class="dot">.</span></a>
+    <a href="https://forge-ai.io" class="logo" target="_blank" rel="noopener"><span class="f">F</span>ORGE</a>
     <div class="header-meta">Для Кристины Малышевой · Май 2026</div>
   </div>
 </header>
@@ -1014,8 +992,7 @@
 
 <footer class="footer">
   <div class="container">
-    <a href="https://forge-ai.io" class="footer-logo" target="_blank" rel="noopener"><span class="f">F</span>ORGE</a>
-    <div class="footer-tagline">Внедрение AI в бизнес-процессы · <a href="https://forge-ai.io" target="_blank" rel="noopener">forge-ai.io</a></div>
+    <a href="https://forge-ai.io" target="_blank" rel="noopener">forge-ai.io</a> · Внедрение AI в бизнес-процессы
   </div>
 </footer>
 
