@@ -89,7 +89,7 @@
     align-items: baseline;
   }
   .logo .dot {
-    color: var(--accent);
+    color: #F97316;
     margin-left: 1px;
   }
   .header-meta {
@@ -143,10 +143,11 @@
     gap: 12px;
   }
   .tldr-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 4px;
-    padding: 18px 20px;
+    padding: 22px 20px 18px;
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 12px;
@@ -156,8 +157,8 @@
   }
   .tldr-card:hover {
     transform: translateY(-2px);
-    border-color: var(--accent);
-    box-shadow: 0 8px 20px rgba(74, 109, 167, 0.08);
+    border-color: var(--primary);
+    box-shadow: 0 8px 20px rgba(30, 70, 255, 0.10);
   }
   .tldr-letter {
     font-family: 'Space Grotesk', 'Manrope', sans-serif;
@@ -167,8 +168,28 @@
     line-height: 1;
     letter-spacing: -0.03em;
   }
-  .tldr-card:nth-child(1) .tldr-letter,
   .tldr-card:nth-child(3) .tldr-letter { color: var(--accent); }
+  .tldr-badge {
+    position: absolute;
+    top: -9px;
+    right: 14px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    line-height: 1.4;
+  }
+  .tldr-badge-main {
+    background: var(--accent);
+    color: white;
+  }
+  .tldr-badge-trial {
+    background: var(--bg);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+  }
   .tldr-name {
     font-family: 'Manrope', sans-serif;
     font-weight: 700;
@@ -242,6 +263,24 @@
     background: var(--primary);
   }
   .option.recommended::before { background: var(--accent); height: 6px; }
+  .option.option-trial::before { background: var(--primary); height: 4px; }
+
+  .recommended-badge-trial {
+    background: var(--bg) !important;
+    color: var(--primary) !important;
+    border: 1px solid var(--primary);
+  }
+
+  .option-upsell {
+    background: var(--surface-2);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-top: 24px !important;
+  }
+  .option-upsell h4 {
+    color: var(--accent) !important;
+  }
+  .option-upsell p { margin: 0; font-size: 15px; }
   .option-header {
     display: flex;
     align-items: baseline;
@@ -257,6 +296,7 @@
     line-height: 1;
   }
   .option.recommended .option-letter { color: var(--accent); }
+  .option.option-trial .option-letter { color: var(--primary); }
   .option h3 {
     margin: 0;
     flex: 1;
@@ -453,6 +493,53 @@
     margin: 16px 0 28px;
   }
 
+  /* Quick summary block (between hero and section 01) */
+  .quick-summary {
+    background: var(--surface);
+    border-left: 4px solid var(--primary);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin: 0;
+  }
+  .quick-summary-label {
+    display: inline-block;
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .quick-summary p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 0 12px;
+  }
+  .quick-summary p:last-child { margin-bottom: 0; }
+  .quick-summary b { color: var(--primary-dark); }
+  .quick-summary .qs-budgets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 28px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  .quick-summary .qs-budgets span b {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 16px;
+    margin-right: 4px;
+  }
+  .quick-summary-section {
+    padding: 56px 0 0 !important;
+    border-top: 0 !important;
+  }
+
   /* Bridge between variants section and recommendation */
   .bridge {
     display: inline-flex;
@@ -621,7 +708,7 @@
 
 <nav class="stickynav" id="stickynav" aria-hidden="true">
   <div class="stickynav-inner">
-    <a href="#var-a"><b>A</b> Консультант</a>
+    <a href="#var-a"><b>A</b> Сопровождение</a>
     <a href="#var-b"><b>B</b> Диагностика</a>
     <a href="#var-c"><b>C</b> Обучение</a>
     <a href="#recommendation">Рекомендация</a>
@@ -644,20 +731,39 @@
 
     <div class="tldr">
       <a href="#var-a" class="tldr-card">
+        <span class="tldr-badge tldr-badge-trial">Trial</span>
         <span class="tldr-letter">A</span>
-        <span class="tldr-name">Консультант по AI Native 80%</span>
-        <span class="tldr-meta">1-2 месяца · лёгкий старт</span>
+        <span class="tldr-name">Стратегическое сопровождение</span>
+        <span class="tldr-meta">2 месяца · 150-200К</span>
       </a>
       <a href="#var-b" class="tldr-card">
         <span class="tldr-letter">B</span>
         <span class="tldr-name">Диагностика AI-зрелости</span>
-        <span class="tldr-meta">2 недели · системная картина</span>
+        <span class="tldr-meta">2 недели · 300-450К</span>
       </a>
       <a href="#var-c" class="tldr-card">
+        <span class="tldr-badge tldr-badge-main">Рекомендуем</span>
         <span class="tldr-letter">C</span>
         <span class="tldr-name">Прокачка топов до AI-natives</span>
-        <span class="tldr-meta">5 недель · фундамент + discovery</span>
+        <span class="tldr-meta">5 недель · 500-700К</span>
       </a>
+    </div>
+  </div>
+</section>
+
+<section class="quick-summary-section">
+  <div class="container">
+    <div class="quick-summary">
+      <span class="quick-summary-label">TL;DR</span>
+      <p>Три варианта совместной работы по AI-интеграции в Changellenge — от лёгкого 2-месячного сопровождения до полноценной прокачки управленческой команды.</p>
+      <p><b>Наша рекомендация — Вариант C</b> (прокачка управленческой команды) как фундамент. Он закрывает корневую проблему: разрозненное использование AI. После C — внутренний discovery и команда, способная сама запускать следующие пилоты.</p>
+      <p><b>Если C сейчас масштабно — Вариант A</b> (стратегическое сопровождение на 2 месяца) как trial. С опцией перехода в C/B и зачётом 50% уже оплаченного.</p>
+      <div class="qs-budgets">
+        <span><b>A</b> 150-200К</span>
+        <span><b>B</b> 300-450К</span>
+        <span><b>C</b> 500-700К</span>
+        <span style="color: var(--text-muted); font-style: italic;">Точные цифры после выбора направления</span>
+      </div>
     </div>
   </div>
 </section>
@@ -696,29 +802,35 @@
     <p style="color: var(--text-muted); font-size: 17px; margin-bottom: 36px; max-width: 720px;">Три формата. Можно по отдельности, можно в паре. Дальше — финальный скоуп и цифры в полном предложении.</p>
 
     <!-- VARIANT A -->
-    <div class="option recommended" id="var-a">
+    <div class="option option-trial" id="var-a">
       <div class="option-header">
         <div class="option-letter">A</div>
-        <h3>Консультант по AI Native 80%</h3>
-        <span class="recommended-badge">Рекомендуем</span>
+        <h3>Стратегическое сопровождение AI Native 80%</h3>
+        <span class="recommended-badge recommended-badge-trial">Trial</span>
       </div>
-      <div class="option-pitch">Час в две недели — и слабые места реализации AI Native 80% видны до запуска. Формат для проверки совместимости без крупного проекта.</div>
+      <div class="option-pitch">Двухмесячный trial-формат с гарантированной точкой выхода вверх. Сопровождаем вашу команду на реализации AI Native 80%, к концу — отдаём документ-рекомендацию по следующему шагу в зрелости компании.</div>
 
       <div class="option-block">
         <h4>Что делаем</h4>
-        <p>Знакомимся с тем, что собрала ваша команда внутри по «AI Native 80%». Дальше — серия часовых-двухчасовых сессий по мере вашей готовности (раз в одну-две недели). На каждой разбираем: что сделано, критикуем промпты и архитектуру, подсвечиваем риски, предлагаем следующие шаги. Между сессиями на связи в Telegram для коротких вопросов.</p>
+        <p>Знакомимся с тем, что собрала ваша команда внутри по «AI Native 80%». Дальше — серия сессий по 1-2 часа раз в одну-две недели в течение 2 месяцев. На каждой: разбор что сделано, критика промптов и архитектуры, подсветка рисков, рекомендации по следующим шагам. Между сессиями на связи в Telegram для коротких вопросов.</p>
+        <p>В конце 2 месяцев — <b>стратегическая рекомендация на 5-7 страниц</b>: где ваша AI-зрелость сейчас, где узкие места, какой следующий шаг даст максимальный рост capacity.</p>
       </div>
 
       <div class="option-block">
         <h4>Зачем это вам</h4>
-        <p>Сократить риск, что внутренняя реализация уйдёт в тупик через месяц и придётся переделывать. Получить взгляд практиков, которые работают в Claude Code ежедневно и держат собственные AI-системы в production. Без обязательств с обеих сторон — попробовать формат сотрудничества прежде чем заходить в крупный проект.</p>
+        <p>Сократить риск, что внутренняя реализация уйдёт в тупик через месяц и придётся переделывать. Получить взгляд практиков, которые работают в Claude Code ежедневно и держат собственные AI-системы в production. Финальная рекомендация — это не «спасибо за работу», а карта со следующим конкретным шагом, который можно нести руководству.</p>
+      </div>
+
+      <div class="option-block option-upsell">
+        <h4>Опция апсейла</h4>
+        <p>Если в процессе становится понятно, что нужен полноценный B или C — переходим, и <b>50% стоимости консультаций засчитывается</b> в стоимость крупного проекта.</p>
       </div>
 
       <div class="option-meta">
-        <div class="option-meta-item"><b>Длительность</b>1-2 месяца</div>
-        <div class="option-meta-item"><b>Формат</b>2-4 онлайн-сессии по 1-2 часа</div>
-        <div class="option-meta-item"><b>Когда стартуем</b>Хоть сейчас</div>
-        <div class="option-meta-item"><b>Цена</b>Вилка на этапе согласования</div>
+        <div class="option-meta-item"><b>Длительность</b>Строго 2 месяца</div>
+        <div class="option-meta-item"><b>Формат</b>4-6 онлайн-сессий по 1-2 часа</div>
+        <div class="option-meta-item"><b>На выходе</b>Стратегическая рекомендация 5-7 страниц</div>
+        <div class="option-meta-item"><b>Цена</b>150-200К фикс-пакетом</div>
       </div>
     </div>
 
@@ -749,7 +861,7 @@
         <div class="option-meta-item"><b>Длительность</b>2 недели</div>
         <div class="option-meta-item"><b>Участие команды</b>5-7 интервью × 45-60 мин</div>
         <div class="option-meta-item"><b>На выходе</b>Документ 15-20 стр. + презентация + 3-5 пилотов</div>
-        <div class="option-meta-item"><b>Цена</b>Вилка на этапе согласования</div>
+        <div class="option-meta-item"><b>Цена</b>300-450К за 2 недели</div>
       </div>
     </div>
 
@@ -786,7 +898,7 @@
         <div class="option-meta-item"><b>Длительность</b>5 недель</div>
         <div class="option-meta-item"><b>Участники</b>5-9 топов</div>
         <div class="option-meta-item"><b>Объём</b>27-36 часов сессий + материалы + 1 мес поддержки</div>
-        <div class="option-meta-item"><b>Цена</b>Вилка на этапе согласования</div>
+        <div class="option-meta-item"><b>Цена</b>500-700К за программу</div>
       </div>
     </div>
 
@@ -852,18 +964,18 @@
     <h2>Как лучше начать</h2>
 
     <div class="rec-main">
-      <h3>Предварительно — <span class="accent">A + C параллельно</span></h3>
-      <p><b>A</b> — лёгкий вход. Решает вашу текущую задачу (AI Native 80%) и снижает риск тупика в реализации, которую делает ваша команда.</p>
-      <p><b>C</b> — фундамент для всего, что будет дальше. Прокачка управленческой команды одновременно решает три задачи: вывод вашей AI-зрелости на новый уровень, внутренний discovery в формате, на который не способен любой внешний аудит, и подготовка топов как евангелистов в свои юниты.</p>
-      <p style="margin-top: 14px;">Можем стартовать без ожидания возвращения ключевого контакта по AI — его участие добавляем по мере доступности. Параллельно даёт вам две вещи — быструю отдачу (A) и системный сдвиг (C).</p>
+      <h3>Основной сценарий — <span class="accent">Вариант C</span></h3>
+      <p>Это фундамент, на котором строится всё остальное. Прокачка управленческой команды одновременно решает три задачи: вывод AI-зрелости на новый уровень («3 из 9» → вся команда), внутренний discovery в формате, на который не способен любой внешний аудит, и подготовка топов как евангелистов в свои юниты.</p>
+      <p>После C — у вас команда, способная сама запускать пилоты и каскадировать AI в юниты органически, через амбассадоров, а не «сверху сказали».</p>
+      <p style="margin-top: 14px;">Это решает корневую проблему — «суперразрозненно, не масштабируется». Не точечной автоматизацией, а сменой уровня зрелости компании.</p>
     </div>
 
     <div class="rec-axis">
-      <h4>Как выбирать между парами</h4>
+      <h4>Как выбирать</h4>
       <ul>
-        <li><b>A + C</b> — если приоритет: быстро снизить риск тупика в текущей реализации + параллельно построить фундамент для всего, что будет дальше.</li>
-        <li><b>A + B</b> — если приоритет: получить системную картину прежде, чем заходить в крупный проект (часть работы B стартует сразу, часть — по возвращении ключевого контакта).</li>
-        <li><b>Только A</b> — если приоритет: минимально проверить формат совместной работы.</li>
+        <li><b>C</b> — если есть бюджет и готовность к 5-недельной программе. Главный сценарий, максимальная отдача.</li>
+        <li><b>A → C</b> — если C сейчас масштабно. Старт с trial-сопровождения на 2 месяца, в процессе понимаем нужен ли крупный проект, при переходе в C/B — зачёт 50% уже оплаченного. Низкий вход, высокая опциональность.</li>
+        <li><b>B</b> — альтернатива, если приоритет: получить системную карту прежде, чем что-то делать. Подходит когда нужен общий язык внутри управленческой команды до выбора пилота.</li>
       </ul>
     </div>
   </div>
@@ -873,7 +985,7 @@
   <div class="container">
     <div class="section-num">06 · Следующий шаг</div>
     <h2>Полчаса видеозвонка — и выбираем направление</h2>
-    <p>Свободные слоты — <b>14-15 мая</b>. После выбора собираем ваши цифры на коротком discovery и оформляем в полное предложение — нечестно называть цену до объёма.</p>
+    <p>Свободные слоты — <b>14-15 мая</b>. После выбора собираем ваши цифры на коротком discovery и финализируем в полном предложении — точная цифра в пределах вилки, сроки, состав работ.</p>
     <div class="cta-buttons">
       <a href="https://t.me/nailmardamshin" class="btn btn-primary" target="_blank" rel="noopener">Написать в Telegram</a>
       <a href="mailto:nail.mardamshin@gmail.com" class="btn btn-secondary">Email</a>
