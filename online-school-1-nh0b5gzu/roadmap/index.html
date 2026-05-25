@@ -324,6 +324,34 @@
       border-top: none;
     }
 
+    .task--milestone {
+      background: linear-gradient(90deg, rgba(82, 4, 132, 0.07), rgba(82, 4, 132, 0.015));
+      border-left: 3px solid var(--purple);
+      border-top: none !important;
+      padding: 12px 12px 12px 13px;
+      border-radius: 8px;
+      margin: 8px 0;
+    }
+
+    .task--milestone + .task {
+      border-top: none;
+    }
+
+    .task__milestone-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #fff;
+      background: var(--purple);
+      padding: 2px 9px;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+
     .task__status {
       flex-shrink: 0;
       width: 22px;
@@ -667,11 +695,16 @@
       const ownerClass = `task__owner--${ownerKey}`;
       const ownerLabel = OWNER_LABEL[task.owner] || task.owner;
       const doneClass = task.status === 'done' ? ' task--done' : '';
+      const milestoneClass = task.milestone ? ' task--milestone' : '';
 
       let deadlineHtml = '';
       if (task.deadline) {
         deadlineHtml = `<span class="task__deadline-badge">&#128197; ${formatDate(task.deadline)}</span>`;
       }
+
+      const milestoneBadge = task.milestone
+        ? `<span class="task__milestone-badge">&#9733; Ключевая веха</span>`
+        : '';
 
       let noteHtml = '';
       if (task.note) {
@@ -679,11 +712,12 @@
       }
 
       return `
-        <li class="task${doneClass}">
+        <li class="task${doneClass}${milestoneClass}">
           ${icon}
           <div class="task__body">
             <div class="task__title-row">
               <span class="task__name">${escapeHtml(task.name)}</span>
+              ${milestoneBadge}
               <span class="task__owner ${ownerClass}">${ownerLabel}</span>
               ${deadlineHtml}
             </div>

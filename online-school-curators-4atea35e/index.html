@@ -105,6 +105,23 @@
         .cta-section p { opacity: 0.85; margin-bottom: 28px; }
         .cta-btn { display: inline-block; background: #fff; color: var(--purple-deep); padding: 16px 44px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 16px; }
 
+        /* header */
+        html { scroll-behavior: smooth; }
+        .site-header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+        .header-logo { font-weight: 700; letter-spacing: 2px; color: var(--purple-deep); text-decoration: none; font-size: 18px; }
+        .header-nav { display: flex; gap: 24px; }
+        .header-nav a { color: var(--text); text-decoration: none; font-size: 14px; font-weight: 500; }
+        .header-nav a:hover { color: var(--purple-deep); }
+        .header-cta { background: var(--purple-deep); color: #fff; padding: 8px 18px; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 600; }
+        section[id] { scroll-margin-top: 72px; }
+        @media (max-width: 720px) { .header-nav { display: none; } }
+
+        /* footer */
+        .site-footer { background: var(--text); color: rgba(255,255,255,0.7); padding: 32px 0; }
+        .site-footer .container { display: flex; justify-content: space-between; align-items: center; font-size: 14px; flex-wrap: wrap; gap: 12px; }
+        .site-footer a { color: #fff; text-decoration: none; font-weight: 600; }
+
         /* reveal */
         .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
         .reveal.in { opacity: 1; transform: none; }
@@ -117,6 +134,20 @@
 </head>
 <body>
 
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="#top" class="header-logo">FORGE</a>
+        <nav class="header-nav">
+            <a href="#potential">Потенциал</a>
+            <a href="#solution">Решение</a>
+            <a href="#pricing">Стоимость</a>
+            <a href="#roadmap">Развитие</a>
+        </nav>
+        <a href="https://t.me/nmardamshin" class="header-cta">Обсудить</a>
+    </div>
+</header>
+
+<span id="top"></span>
 <!-- Hero -->
 <div class="hero">
     <div class="container">
@@ -138,32 +169,39 @@
             <tr><td><strong>Куратор как «фильтр»</strong><br><span style="color:var(--text-muted);font-size:13px;">читает, исправляет, ориентирует под клиента, отправляет</span></td><td>Большое количество времени на пересылку и оформление вместо работы с семьёй</td></tr>
             <tr><td><strong>Много операционки в таблицах</strong></td><td>Нет единой клиентской базы — время уходит на ручной поиск и сверку</td></tr>
             <tr><td><strong>Ручное формирование отчётов</strong></td><td>Повторяющийся процесс на каждого ученика каждую неделю/две</td></tr>
+            <tr><td><strong>Нет аналитики</strong></td><td>Не видно, где теряется время и качество — нет оперативных данных для управленческих решений</td></tr>
+            <tr><td><strong>Качество — человеческий фактор</strong></td><td>Ручные ошибки в данных и сообщениях → жалобы и негатив, растущая нагрузка на контроль качества</td></tr>
             <tr><td><strong>Рост = найм</strong></td><td>При увеличении числа учеников нагрузка масштабируется только людьми</td></tr>
         </table>
     </div>
 </section>
 
 <!-- Потенциал -->
-<section>
+<section id="potential">
     <div class="container">
-        <h2 class="reveal">Потенциал</h2>
-        <p class="section-subtitle reveal">Масштаб ручного ресурса — по оценке из вашего ТЗ.</p>
-        <div class="cards reveal">
-            <div class="card"><div class="card-icon card-icon-purple">📊</div><h4>Отчётность</h4><p>~10 000 учеников в месяц, по вашей оценке — порядка <strong>20 FTE</strong> и <strong>~2 млн ₽/мес</strong> операционного ресурса.</p></div>
-            <div class="card"><div class="card-icon card-icon-purple">📄</div><h4>Аттестация</h4><p>~13 000 документов вручную в конце года — и число растёт с каждым годом.</p></div>
-        </div>
-        <div class="banner reveal">Цель автоматизации — высвободить значимую часть этого ресурса на работу с семьёй и рост числа учеников на куратора. <strong>Точную долю замеряем на пилоте</strong> — не обещаем цифру вслепую.</div>
+        <h2 class="reveal">Потенциал автоматизации отчётности</h2>
+        <p class="section-subtitle reveal">Расчёт на основе оценки из вашего ТЗ.</p>
+        <table class="reveal">
+            <tr><th>Показатель</th><th>Значение</th></tr>
+            <tr><td>Отчётность сейчас (в месяц)</td><td><strong>~2 010 000 ₽</strong> · 20 FTE · ~10 000 учеников</td></tr>
+            <tr><td>Потенциальная экономия (в год)</td><td><strong>~24 млн ₽</strong></td></tr>
+            <tr><td>Окупаемость</td><td><strong>менее 1 месяца</strong></td></tr>
+            <tr class="row-total"><td>ROI за год</td><td><strong>~2500%</strong></td></tr>
+        </table>
     </div>
 </section>
 
 <!-- Цель -->
 <section>
     <div class="container">
-        <h2 class="reveal">Зачем — ваша цель</h2>
-        <p class="section-subtitle reveal">Высвободить часы куратора на ученика.</p>
+        <h2 class="reveal">Цели</h2>
+        <p class="section-subtitle reveal">Повысить рентабельность, сняв с кураторов ручную рутину.</p>
+        <div class="banner violet reveal"><strong>Повышение рентабельности</strong> через автоматизацию ручной подготовки отчётности. Освобождённое время куратора идёт на личную работу с семьёй — выше лояльность и сохраняемость — либо на рост числа учеников на куратора. И всё это — с ростом качества за счёт снятия человеческого фактора.</div>
         <div class="cards reveal">
             <div class="card"><div class="card-icon card-icon-green">📈</div><h4>Глубже работа с семьёй</h4><p>Освобождённое время — на лояльность и вовлечённость → выше сохраняемость.</p></div>
             <div class="card"><div class="card-icon card-icon-purple">👥</div><h4>Больше учеников на куратора</h4><p>При том же качестве — с 80 до 100–110 учеников. И то, и другое работает на рентабельность.</p></div>
+            <div class="card"><div class="card-icon card-icon-purple">📊</div><h4>Аналитика и прозрачность</h4><p>Оперативные данные по процессу вместо ручного сбора — для управленческих решений.</p></div>
+            <div class="card"><div class="card-icon card-icon-green">✅</div><h4>Качество без человеческого фактора</h4><p>Меньше ручных ошибок в данных и сообщениях → меньше жалоб, выше SLA.</p></div>
         </div>
         <p class="body reveal" style="font-size:14px;color:var(--text-muted);">Ключевая метрика — часы куратора на операционные задачи. Целевой ориентир, замеряем на пилоте.</p>
     </div>
@@ -172,11 +210,11 @@
 <!-- Подход -->
 <section>
     <div class="container">
-        <h2 class="reveal">Подход — внешний слой</h2>
-        <p class="section-subtitle reveal">Мы не вмешиваемся в вашу платформу. Мы ставим оркестратор поверх существующих систем и связываем их между собой.</p>
+        <h2 class="reveal">Наш подход</h2>
+        <div class="banner violet reveal">Мы не делаем отдельный сервис под отчёты. Берём инфраструктуру, которую уже строим для вашего документооборота, и наращиваем на неё новые процессы: сначала кураторов, потом другие отделы. Каждый следующий процесс идёт <strong>поверх готового</strong>, а не с нуля.</div>
         <div class="cards reveal">
-            <div class="card"><div class="card-icon card-icon-purple">🔌</div><h4>Поверх ваших систем</h4><p>Amo, Трекер, CarrotQuest, 1С, таблицы. Платформу не трогаем — её зона остаётся LMS-команде.</p></div>
-            <div class="card"><div class="card-icon card-icon-purple">🧑‍💼</div><h4>Куратор в контроле</h4><p>Сервис готовит — человек проверяет и подтверждает. Автоматизация снимает рутину, не контроль.</p></div>
+            <div class="card"><div class="card-icon card-icon-purple">🔌</div><h4>Поверх ваших систем</h4><p>Интеграции с Amo, Трекером, 1С и таблицами уже работают: делали их для документооборота, здесь переиспользуем. Добавляем CarrotQuest. Платформу не трогаем, её зона остаётся LMS-команде.</p></div>
+            <div class="card"><div class="card-icon card-icon-purple">🧑‍💼</div><h4>Куратор в контроле</h4><p>Сначала куратор остаётся в процессе — проверяет и подтверждает. После тестов и накопления доверия переходим к полной автоматизации.</p></div>
             <div class="card"><div class="card-icon card-icon-green">🔒</div><h4>Безопасность данных учеников</h4><p>Сервер в РФ с физическим ключом, ПДн не уходят во внешние AI, документы 152-ФЗ собраны. Уже сделано.</p></div>
             <div class="card"><div class="card-icon card-icon-green">⚡</div><h4>Discovery ≈ 0</h4><p>Уже знаем ваши системы и процессы. Инфраструктура развёрнута — старт без раскачки.</p></div>
         </div>
@@ -184,14 +222,14 @@
 </section>
 
 <!-- Решение: гонка процесса -->
-<section>
+<section id="solution">
     <div class="container">
         <h2 class="reveal">Как меняется процесс отчёта</h2>
-        <p class="section-subtitle reveal">Сейчас куратор делает всё руками. После автоматизации — сервис готовит, куратор подтверждает.</p>
+        <p class="section-subtitle reveal">Сейчас куратор делает всё руками. После полной автоматизации процесс идёт без его участия.</p>
         <div class="race-grid">
             <div class="race-card race-card--manual" id="cardManual">
                 <svg class="race-doc" id="docManual" viewBox="0 0 18 22" fill="none"><rect x="0.5" y="0.5" width="17" height="21" rx="2" fill="white" stroke="#b84040"/><line x1="4" y1="6" x2="14" y2="6" stroke="#b84040" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="10" x2="14" y2="10" stroke="#e0c0c0" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="14" x2="10" y2="14" stroke="#e0c0c0" stroke-width="1.5" stroke-linecap="round"/></svg>
-                <div class="race-header"><div class="race-header__label" style="color:#9a4a4a;">Сейчас — всё делает человек</div><div class="race-header__time" style="color:#b84040;">~15 мин</div></div>
+                <div class="race-header"><div class="race-header__label" style="color:#9a4a4a;">Сейчас — всё делает человек</div><div class="race-header__time" style="color:#b84040;">от 5 мин</div></div>
                 <ol class="race-steps" id="stepsManual">
                     <li class="race-step"><span class="race-step__num" style="background:#e8dede;color:#8a5a5a;">1</span><span class="race-step__text">Настраивает задачу на отчёт в Amo</span></li>
                     <li class="race-step"><span class="race-step__num" style="background:#e8dede;color:#8a5a5a;">2</span><span class="race-step__text">Заходит в платформу, выбирает ученика и период</span></li>
@@ -201,29 +239,28 @@
                     <li class="race-step"><span class="race-step__num" style="background:#e8dede;color:#8a5a5a;">6</span><span class="race-step__text">Отправляет в личный канал</span></li>
                     <li class="race-step"><span class="race-step__num" style="background:#e8dede;color:#8a5a5a;">7</span><span class="race-step__text">Фиксирует отправку в Amo</span></li>
                 </ol>
-                <div class="race-finish" id="finishManual" style="color:#b84040;">Готово — ~15 минут на ученика 😮‍💨</div>
+                <div class="race-finish" id="finishManual" style="color:#b84040;">Готово — от 5 минут на ученика 😮‍💨</div>
             </div>
             <div class="race-card race-card--auto" id="cardAuto">
                 <svg class="race-doc" id="docAuto" viewBox="0 0 18 22" fill="none"><rect x="0.5" y="0.5" width="17" height="21" rx="2" fill="white" stroke="#2d8a5e"/><line x1="4" y1="6" x2="14" y2="6" stroke="#2d8a5e" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="10" x2="14" y2="10" stroke="#b8eda4" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="14" x2="10" y2="14" stroke="#b8eda4" stroke-width="1.5" stroke-linecap="round"/></svg>
-                <div class="race-header"><div class="race-header__label" style="color:#2d8a5e;">После автоматизации</div><div class="race-header__time" style="color:#2d8a5e;">~1 мин</div></div>
+                <div class="race-header"><div class="race-header__label" style="color:#2d8a5e;">После полной автоматизации</div><div class="race-header__time" style="color:#2d8a5e;">~30 сек</div></div>
                 <ol class="race-steps" id="stepsAuto">
                     <li class="race-step"><span class="race-step__num" style="background:#d4f0e0;color:#2d7a4e;">1</span><span class="race-step__text">Триггер на отчёт срабатывает по расписанию / из Amo</span><span class="race-badge race-badge--auto">auto</span></li>
                     <li class="race-step"><span class="race-step__num" style="background:#d4f0e0;color:#2d7a4e;">2</span><span class="race-step__text">Отчёт формируется и публикуется в ЛК</span><span class="race-badge race-badge--auto">auto</span></li>
                     <li class="race-step"><span class="race-step__num" style="background:#d4f0e0;color:#2d7a4e;">3</span><span class="race-step__text">Готовится сообщение родителю по шаблону</span><span class="race-badge race-badge--auto">auto</span></li>
                     <li class="race-step"><span class="race-step__num" style="background:#d4f0e0;color:#2d7a4e;">4</span><span class="race-step__text">Отправляется в личный канал</span><span class="race-badge race-badge--auto">auto</span></li>
                     <li class="race-step"><span class="race-step__num" style="background:#d4f0e0;color:#2d7a4e;">5</span><span class="race-step__text">Статус фиксируется в Amo</span><span class="race-badge race-badge--auto">auto</span></li>
-                    <li class="race-step"><span class="race-step__num" style="background:#ede0f5;color:#520484;">6</span><span class="race-step__text">Куратор проверяет и подтверждает</span><span class="race-badge race-badge--manual">контроль</span></li>
                 </ol>
-                <div class="race-finish" id="finishAuto" style="color:#2d8a5e;">✓ Куратор только контролирует</div>
+                <div class="race-finish" id="finishAuto" style="color:#2d8a5e;">✓ Готово без участия куратора</div>
             </div>
         </div>
-        <div class="race-result" id="raceResult">⚡ Рутина уходит — остаётся контроль</div>
+        <div class="race-result" id="raceResult">⚡ Процесс идёт сам, без куратора</div>
         <div style="text-align:center; margin-top:16px;"><button class="race-btn" id="raceBtn">Запустить оба процесса ▶</button></div>
     </div>
 </section>
 
 <!-- Стоимость -->
-<section>
+<section id="pricing">
     <div class="container">
         <h2 class="reveal">Структура стоимости</h2>
         <p class="section-subtitle reveal">Мы строим не разовую доработку, а переиспользуемый фундамент, который потом обслуживает любой следующий процесс. Поэтому стоимость делится на две части разной природы.</p>
@@ -231,15 +268,15 @@
             <div class="ptag">🏗 Инвестиция (один раз)</div>
             <div class="pname">Интеграционный фундамент</div>
             <div class="pdesc">Оркестратор + связки с Amo, Трекером, CarrotQuest, LMS, 1С + единая модель данных (золотые ID ученика/родителя) + контур безопасности 152-ФЗ. Строится один раз и дальше обслуживает все будущие автоматизации — каждый следующий процесс не платит за фундамент повторно.</div>
-            <div class="pnum">600–750к ₽ <small>[финал уточняется]</small></div>
+            <div class="pnum">400–500к ₽</div>
         </div>
         <div class="price-block reveal">
             <div class="ptag">📊 Доработка поверх фундамента</div>
             <div class="pname">Отчёты кураторов</div>
             <div class="pdesc">Бизнес-логика отчёта, доставка, интерфейс куратора.</div>
-            <div class="pnum">350–450к ₽ <small>[финал уточняется]</small></div>
+            <div class="pnum">300–400к ₽</div>
         </div>
-        <div class="banner violet reveal"><strong>Условия:</strong> оплата 50/50 (аванс / по приёмке этапа), поддержка 1 месяц после релиза включена. Интеллектуальные права на код — ваши, код хранится на вашем сервере. Никакой зависимости от нас как от подрядчика.</div>
+        <div class="banner violet reveal"><strong>Условия:</strong> оплата 50/50 (аванс / приёмка работы), поддержка 1 месяц после релиза включена. Интеллектуальные права на код — ваши, код хранится на вашем сервере. Никакой зависимости от нас как от подрядчика.</div>
     </div>
 </section>
 
@@ -249,7 +286,7 @@
         <h2 class="reveal">Что нужно от вас</h2>
         <p class="section-subtitle reveal">Минимум — большая часть инфраструктуры уже развёрнута.</p>
         <div class="cards reveal">
-            <div class="card"><div class="card-icon card-icon-purple">🔑</div><h4>Доступы (read)</h4><p>К Amo, Трекеру, CarrotQuest. Выдаёте и отзываете вы, минимально необходимые.</p></div>
+            <div class="card"><div class="card-icon card-icon-purple">🔑</div><h4>Доступ и интеграция с LMS</h4><p>Доступ к данным LMS и настройка интеграции на стороне вашей команды. Плюс read-доступы к Amo, Трекеру, CarrotQuest — выдаёте и отзываете вы.</p></div>
             <div class="card"><div class="card-icon card-icon-purple">🤝</div><h4>Кик-офф с LMS-командой</h4><p>~1 встреча — зафиксировать контракт данных (что платформа отдаёт наружу).</p></div>
             <div class="card"><div class="card-icon card-icon-green">👤</div><h4>Куратор на пилот</h4><p>1 куратор сопровождает пилотную группу — проверяет, отмечает что поправить.</p></div>
             <div class="card"><div class="card-icon card-icon-green">📋</div><h4>Точка приёмки</h4><p>Один ответственный с вашей стороны для согласований и приёмки этапов.</p></div>
@@ -286,7 +323,7 @@
 </section>
 
 <!-- Дорожная карта -->
-<section>
+<section id="roadmap">
     <div class="container">
         <h2 class="reveal">Куда это масштабируется</h2>
         <p class="section-subtitle reveal">Тот же фундамент обслуживает следующие процессы — без повторной интеграции. Каждый следующий дешевле предыдущего.</p>
@@ -309,6 +346,7 @@
             <div class="card"><div class="card-icon card-icon-purple">🛠</div><h4>Команда полного цикла</h4><p>Аналитика, архитектура, разработка, поддержка — в одних руках.</p></div>
             <div class="card"><div class="card-icon card-icon-purple">♻️</div><h4>Переиспользуемый актив</h4><p>Один фундамент → много процессов. Стоимость на процесс снижается с каждым следующим.</p></div>
             <div class="card"><div class="card-icon card-icon-green">🔓</div><h4>Вы свободны</h4><p>Внешний слой не привязывает к одному подрядчику и одной платформе — процессы остаются, даже если платформа меняется.</p></div>
+            <div class="card"><div class="card-icon card-icon-purple">🔍</div><h4>Полная прозрачность</h4><p>Подробный роадмеп проекта в реальном времени: видно, что сделано, что в работе и что дальше. <a href="https://nailmardamshin.github.io/forge-c/online-school-1-nh0b5gzu/roadmap/" target="_blank" style="color:var(--purple-deep);font-weight:600;text-decoration:none;">Пример — роадмеп вашего документооборота →</a></p></div>
         </div>
     </div>
 </section>
@@ -321,6 +359,13 @@
         <a href="https://t.me/nmardamshin" class="cta-btn">Обсудить старт</a>
     </div>
 </div>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>Forge — автоматизация бизнес-процессов с AI</span>
+        <a href="https://forge-ai.io" target="_blank">forge-ai.io</a>
+    </div>
+</footer>
 
 <script>
 // reveal on scroll
@@ -354,7 +399,7 @@ document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
   }
   async function runRace() {
     if (running) return; running = true; btn.disabled = true; btn.textContent = 'Идёт гонка…'; resetAll();
-    await Promise.all([ animateSteps(stepsAuto, docAuto, finishAuto, [150,150,150,150,150,1500]), animateSteps(stepsManual, docManual, finishManual, 1500) ]);
+    await Promise.all([ animateSteps(stepsAuto, docAuto, finishAuto, [180,180,180,180,300]), animateSteps(stepsManual, docManual, finishManual, 1100) ]);
     setTimeout(() => { result.classList.add('race-result--visible'); btn.textContent = 'Запустить снова ↻'; btn.disabled = false; running = false; }, 400);
   }
   btn.addEventListener('click', runRace);
