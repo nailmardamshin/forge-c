@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Автоматизация процессов кураторов — Онлайн-школа №1</title>
     <meta name="description" content="Автоматизация процессов кураторов, начиная с отчётов. Предложение Forge.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23FFFDF5'/><rect x='1.5' y='1.5' width='29' height='29' fill='none' stroke='%23000000' stroke-width='3'/><rect x='10' y='8' width='5' height='16' fill='%23F97316'/><rect x='10' y='8' width='13' height='4' fill='%23F97316'/><rect x='10' y='14' width='9' height='4' fill='%23F97316'/></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
@@ -149,6 +150,15 @@
         .work-detail li { font-size: 14px; color: var(--text-muted); line-height: 1.5; padding-left: 18px; position: relative; margin-bottom: 8px; }
         .work-detail li:before { content: '—'; position: absolute; left: 0; color: var(--purple-deep); }
         @media (max-width: 720px) { .work-detail { grid-template-columns: 1fr; } }
+
+        /* req-list (Что нужно от вас) */
+        .req-list { margin: 20px 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--white); }
+        .req-item { display: flex; gap: 16px; padding: 18px 20px; align-items: flex-start; }
+        .req-item:not(:last-child) { border-bottom: 1px solid var(--border); }
+        .req-ico { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; background: var(--purple-bg); }
+        .req-ico.green { background: var(--green-light); }
+        .req-body h4 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+        .req-body p { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
 
         /* reveal */
         .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
@@ -327,20 +337,6 @@
     </div>
 </section>
 
-<!-- Что нужно от вас -->
-<section>
-    <div class="container">
-        <h2 class="reveal">Что нужно от вас</h2>
-        <p class="section-subtitle reveal">Минимум: большая часть инфраструктуры уже развёрнута.</p>
-        <div class="cards reveal">
-            <div class="card"><div class="card-icon card-icon-purple">🔑</div><h4>Доступ и интеграция с LMS</h4><p>Доступ к данным LMS и настройка интеграции на стороне вашей команды. Плюс read-доступы к Amo, Трекеру, CarrotQuest (или альтернативному каналу) и Metabase — выдаёте и отзываете вы.</p></div>
-            <div class="card"><div class="card-icon card-icon-purple">🤝</div><h4>Кик-офф с LMS-командой</h4><p>Одна встреча, чтобы зафиксировать контракт данных — что платформа отдаёт наружу.</p></div>
-            <div class="card"><div class="card-icon card-icon-green">👤</div><h4>Кураторы на пилот</h4><p>2–3 куратора ведут пилотную группу: проверяют результат, отмечают, что поправить.</p></div>
-            <div class="card"><div class="card-icon card-icon-green">📋</div><h4>Точка приёмки</h4><p>Один ответственный с вашей стороны — для согласований и приёмки этапов.</p></div>
-        </div>
-    </div>
-</section>
-
 <!-- Сроки / как убираем долгострой -->
 <section>
     <div class="container">
@@ -355,6 +351,20 @@
         <div class="banner reveal"><strong>Demo-точки</strong> каждые 1–2 недели: вы видите прогресс, а не ждёте «чёрный ящик» до конца.</div>
         <div class="banner violet reveal"><strong>Что не входит в пилот:</strong> доработка LMS-платформы (зона вашей команды), масштабирование на все тарифы и кураторов, другие процессы — зачисление, аттестация, аналитика. Это отдельные этапы после пилота.</div>
         <p class="body reveal" style="font-size:13px;color:var(--text-muted);">*Сроки в силе, если интеграционный контракт от LMS-команды готов к согласованной дате.</p>
+    </div>
+</section>
+
+<!-- Что нужно от вас -->
+<section>
+    <div class="container">
+        <h2 class="reveal">Что нужно от вас</h2>
+        <p class="section-subtitle reveal">Минимум: большая часть инфраструктуры уже развёрнута.</p>
+        <div class="req-list reveal">
+            <div class="req-item"><div class="req-ico">🔑</div><div class="req-body"><h4>Доступ и интеграция с LMS</h4><p>Доступ к данным LMS и настройка интеграции на стороне вашей команды. Плюс read-доступы к Amo, Трекеру, CarrotQuest (или альтернативному каналу) и Metabase — выдаёте и отзываете вы.</p></div></div>
+            <div class="req-item"><div class="req-ico">🤝</div><div class="req-body"><h4>Кик-офф с LMS-командой</h4><p>Одна встреча, чтобы зафиксировать контракт данных — что платформа отдаёт наружу.</p></div></div>
+            <div class="req-item"><div class="req-ico green">👤</div><div class="req-body"><h4>Кураторы на пилот</h4><p>2–3 куратора ведут пилотную группу: проверяют результат, отмечают, что поправить.</p></div></div>
+            <div class="req-item"><div class="req-ico green">📋</div><div class="req-body"><h4>Точка приёмки</h4><p>Один ответственный с вашей стороны — для согласований и приёмки этапов.</p></div></div>
+        </div>
     </div>
 </section>
 
