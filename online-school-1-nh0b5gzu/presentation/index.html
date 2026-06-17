@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Онлайн-школа №1 × Forge — итоги шага 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple-deep:#520484; --purple-mid:#5e168d; --purple-light:#e0d6f8; --purple-bg:#f5f1ff;
+  --green-accent:#4bc795; --green-light:#dff6d2; --green-deep:#2d8a5e;
+  --text:#0e1809; --text-muted:#555; --white:#fff; --grey-bg:#f7f7f7; --border:#e0e0e0;
+  --red-soft:#8b2131;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Inter',sans-serif;color:var(--text);background:#1a0a2e}
+
+/* ---- deck ---- */
+.deck{position:relative;width:100vw;height:100vh;overflow:hidden}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  padding:6vh 8vw;opacity:0;visibility:hidden;transform:translateX(40px);
+  transition:opacity .55s ease,transform .55s ease,visibility .55s;background:var(--white);overflow-y:auto}
+.slide.active{opacity:1;visibility:visible;transform:translateX(0)}
+.slide.prev{transform:translateX(-40px)}
+.slide:nth-child(even){background:var(--grey-bg)}
+
+/* hero */
+.slide.hero{background:linear-gradient(135deg,var(--purple-deep) 0%,var(--purple-mid) 100%);color:var(--white);
+  align-items:flex-start}
+.hero .kicker{display:inline-block;background:rgba(255,255,255,.15);padding:8px 18px;border-radius:30px;
+  font-size:.95rem;font-weight:600;letter-spacing:.3px;margin-bottom:32px}
+.hero h1{font-size:4rem;font-weight:800;line-height:1.08;max-width:16ch;margin-bottom:24px}
+.hero .sub{font-size:1.5rem;font-weight:400;opacity:.92;max-width:30ch}
+.hero .foot{position:absolute;bottom:6vh;left:8vw;font-size:1rem;opacity:.7}
+
+/* headings */
+.eyebrow{color:var(--purple-deep);font-weight:700;font-size:1rem;letter-spacing:1.5px;
+  text-transform:uppercase;margin-bottom:14px}
+.slide h2{font-size:2.6rem;font-weight:800;color:var(--purple-deep);line-height:1.12;margin-bottom:30px;max-width:24ch}
+.slide.hero h2{color:#fff}
+
+/* reveal animation */
+.r{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.slide.active .r{opacity:1;transform:translateY(0)}
+.slide.active .r:nth-child(1){transition-delay:.1s}
+.slide.active .r:nth-child(2){transition-delay:.2s}
+.slide.active .r:nth-child(3){transition-delay:.3s}
+.slide.active .r:nth-child(4){transition-delay:.4s}
+.slide.active .r:nth-child(5){transition-delay:.5s}
+.slide.active .r:nth-child(6){transition-delay:.6s}
+.slide.active .r:nth-child(7){transition-delay:.7s}
+[data-d="1"]{transition-delay:.15s}[data-d="2"]{transition-delay:.3s}[data-d="3"]{transition-delay:.45s}
+[data-d="4"]{transition-delay:.6s}[data-d="5"]{transition-delay:.75s}[data-d="6"]{transition-delay:.9s}
+
+/* bullets */
+.blist{list-style:none;display:flex;flex-direction:column;gap:16px;max-width:60ch}
+.blist li{font-size:1.3rem;line-height:1.4;padding-left:34px;position:relative}
+.blist li::before{content:"";position:absolute;left:0;top:.55em;width:14px;height:14px;border-radius:50%;
+  background:var(--green-accent)}
+.goal{margin-top:30px;background:var(--green-light);border-radius:14px;padding:22px 28px;
+  font-size:1.45rem;font-weight:700;color:var(--purple-deep);max-width:50ch}
+
+/* metric cards (results) */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin:10px 0 24px}
+.metric{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:34px 24px;text-align:center;
+  box-shadow:0 8px 30px rgba(82,4,132,.06)}
+.metric .num{font-size:3.6rem;font-weight:800;color:var(--purple-deep);line-height:1}
+.metric .num.green{color:var(--green-deep)}
+.metric .lbl{margin-top:12px;font-size:1.05rem;color:var(--text-muted);font-weight:500;line-height:1.3}
+.note{font-size:1.05rem;color:var(--text-muted);max-width:75ch;line-height:1.5}
+.note b{color:var(--text)}
+.banner{margin-top:22px;background:var(--green-light);border-radius:12px;padding:16px 24px;
+  font-size:1.25rem;font-weight:700;color:var(--purple-deep)}
+
+/* two-col table (было/стало, экономика) */
+table.t{border-collapse:collapse;width:100%;max-width:90ch;font-size:1.18rem}
+table.t th,table.t td{text-align:left;padding:15px 20px;border-bottom:1px solid var(--border);vertical-align:top}
+table.t th{color:var(--purple-deep);font-weight:700;background:var(--purple-bg)}
+table.t td:first-child{font-weight:600;width:24%;color:var(--purple-deep)}
+.was{color:var(--red-soft)}.now{color:var(--green-deep);font-weight:600}
+tr.done{background:var(--green-light)}
+tr.total td{font-weight:800;background:var(--green-light);font-size:1.25rem}
+.tag{display:inline-block;background:var(--green-accent);color:#fff;font-size:.8rem;font-weight:700;
+  padding:3px 10px;border-radius:20px;vertical-align:middle}
+
+/* econ big */
+.econ{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:26px}
+.econ .box{background:var(--purple-bg);border-radius:16px;padding:30px 26px}
+.econ .box .v{font-size:2.6rem;font-weight:800;color:var(--purple-deep);line-height:1.05}
+.econ .box .k{margin-top:10px;font-size:1.05rem;color:var(--text-muted)}
+
+/* recommend cards */
+.rec{display:flex;flex-direction:column;gap:18px;max-width:80ch;margin-bottom:26px}
+.rec .row{display:flex;align-items:center;gap:24px;background:var(--white);border:1px solid var(--border);
+  border-left:6px solid var(--green-accent);border-radius:14px;padding:22px 26px}
+.rec .row .h{font-size:1.35rem;font-weight:700;color:var(--purple-deep);min-width:230px}
+.rec .row .d{flex:1;font-size:1.1rem;color:var(--text-muted)}
+.rec .row .p{font-size:1.6rem;font-weight:800;color:var(--green-deep);white-space:nowrap}
+.ask{font-size:1.2rem;line-height:1.6;max-width:60ch}
+.ask b{color:var(--purple-deep)}
+
+/* feature grid (что крутого) */
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px}
+.feat .f{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:24px 22px;
+  box-shadow:0 6px 24px rgba(82,4,132,.05)}
+.feat .f .ic{width:46px;height:46px;border-radius:12px;background:var(--purple-bg);display:flex;
+  align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:14px;
+  color:var(--purple-deep);font-weight:800}
+.feat .f h4{font-size:1.18rem;font-weight:700;color:var(--purple-deep);margin-bottom:8px;line-height:1.25}
+.feat .f p{font-size:1rem;color:var(--text-muted);line-height:1.45}
+.feat-foot{margin-top:24px;background:var(--green-light);border-radius:12px;padding:16px 24px;
+  font-size:1.2rem;font-weight:700;color:var(--purple-deep);text-align:center}
+.cap-extra{margin-top:20px;background:var(--purple-bg);border-left:6px solid var(--green-accent);
+  border-radius:14px;padding:20px 26px;display:flex;gap:18px;align-items:center}
+.cap-extra .ce-ic{font-size:1.8rem;flex-shrink:0}
+.cap-extra .ce-t{font-size:1.12rem;line-height:1.45}
+.cap-extra .ce-t b{color:var(--purple-deep)}
+.cap-extra .ce-badge{display:inline-block;background:var(--green-accent);color:#fff;font-size:.8rem;
+  font-weight:700;padding:3px 10px;border-radius:20px;margin-left:6px}
+@media(max-width:900px){.feat{grid-template-columns:1fr 1fr}}
+
+/* flow chart */
+.flow-legend{display:flex;gap:28px;flex-wrap:wrap;margin-bottom:18px;font-size:1.05rem;color:var(--text-muted)}
+.flow-legend span{display:flex;align-items:center;gap:8px}
+.flow-legend i{width:16px;height:16px;border-radius:4px;display:inline-block}
+.flow-legend .cutmark i{width:16px;height:4px;border-radius:2px}
+#flowchart{width:100%;max-width:96ch}
+#flowchart svg{width:100%;height:auto;display:block}
+#flowchart .grid{stroke:var(--border);stroke-width:1}
+#flowchart .axis{fill:var(--text-muted);font-size:13px;font-family:'Inter',sans-serif}
+#flowchart .ln{fill:none;stroke-width:3;stroke-linejoin:round;stroke-linecap:round}
+#flowchart .dot{stroke:#fff;stroke-width:1.5}
+#flowchart .cut{stroke:var(--text-muted);stroke-width:2;stroke-dasharray:6 5}
+#flowchart .cutlbl{fill:var(--purple-deep);font-size:13px;font-weight:700;font-family:'Inter',sans-serif}
+
+/* nav */
+.nav{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:18px;z-index:50}
+.dots{display:flex;gap:9px}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(82,4,132,.25);cursor:pointer;transition:.3s}
+.dot.on{background:var(--purple-deep);transform:scale(1.3)}
+.arrow{width:42px;height:42px;border-radius:50%;border:none;background:var(--purple-deep);color:#fff;
+  font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;opacity:.85}
+.arrow:hover{opacity:1;transform:scale(1.08)}
+.progress{position:fixed;top:0;left:0;height:4px;background:var(--green-accent);z-index:60;transition:width .5s ease}
+.counter{position:fixed;top:18px;right:26px;font-size:.95rem;color:var(--purple-deep);font-weight:600;z-index:50;opacity:.6}
+.hero .counter{color:#fff}
+@media(max-width:900px){.metrics,.econ{grid-template-columns:1fr 1fr}.hero h1{font-size:2.6rem}.slide h2{font-size:1.9rem}.slide{padding:5vh 6vw}}
+</style>
+</head>
+<body>
+<div class="progress" id="prog"></div>
+<div class="counter" id="cnt">1 / 9</div>
+<div class="deck" id="deck">
+
+<!-- 1 HERO -->
+<section class="slide hero active">
+  <span class="kicker r">Forge × Онлайн-школа №1</span>
+  <h1 class="r">Автоматизация документооборота&nbsp;— итоги первого шага</h1>
+  <p class="sub r">Оформление договоров текущих клиентов · боевой режим с 3 июня 2026</p>
+  <div class="foot r">Отчёт по результатам · направления развития</div>
+</section>
+
+<!-- 2 ЗАЧЕМ -->
+<section class="slide">
+  <div class="eyebrow r">Зачем это делали</div>
+  <h2 class="r">Документооборот должен быть контролирующей функцией, а не ручной работой</h2>
+  <p class="note r" style="margin-bottom:22px">Отдел — 18 человек, ФОТ ~1.15М ₽/мес, в сезон +2-3. Масштаб только через найм. Пять болей с брифинга:</p>
+  <ul class="blist">
+    <li class="r">Ручной труд на всех этапах</li>
+    <li class="r">Нет единого расчёта → ошибки в счетах, налоговые риски</li>
+    <li class="r">Данные разбросаны: 1С / Amo / таблицы / переписки</li>
+    <li class="r">Нет аналитики — отвалы считают неделю руками</li>
+    <li class="r">Сложность управления коллективом</li>
+  </ul>
+  <div class="goal r">Цель проекта: 18 → 3-5 человек, рост объёмов без расширения штата</div>
+</section>
+
+<!-- 3 ЧТО ПОСТРОИЛИ -->
+<section class="slide">
+  <div class="eyebrow r">Что построили</div>
+  <h2 class="r">Шаг 1 — оформление договоров текущих клиентов</h2>
+  <p class="note r" style="font-size:1.25rem;margin-bottom:22px"><b>90% потока отдела в сезон</b> (~1620 задач/мес). Полный цикл автоматически:</p>
+  <div class="goal r" style="background:var(--purple-bg);font-weight:600;font-size:1.25rem;max-width:none">
+    заявка (Яндекс.Трекер / Google-таблица) → расчёт цены и скидок → договор + приложение + счёт → заказ в 1С + задача оператору
+  </div>
+  <ul class="blist" style="margin-top:26px">
+    <li class="r"><b>Человек в контуре (supervised):</b> автоматика готовит всё, сотрудник проверяет и жмёт «Отправить». Не замена одного ручного труда другим.</li>
+    <li class="r"><b>Под капотом:</b> интеграции 1С / Amo / Трекер / Google, свой сервер, мониторинг, алерты, журнал каждой операции.</li>
+  </ul>
+</section>
+
+<!-- 3.5 ЧТО КРУТОГО -->
+<section class="slide">
+  <div class="eyebrow r">Что под капотом</div>
+  <h2 class="r">Это не шаблонизатор — система рассуждает как опытный сотрудник</h2>
+  <div class="feat">
+    <div class="f r" data-d="1"><div class="ic">📥</div><h4>Читает заявку из любого источника</h4><p>Форма или таблица, данные в полях или в тексте описания. Собирает воедино из 1С, Amo и Трекера.</p></div>
+    <div class="f r" data-d="2"><div class="ic">🧮</div><h4>Считает как методист</h4><p>Определяет тариф (14+ вариантов), применяет скидки (многодетность, реферальная, акции), строит график под способ оплаты.</p></div>
+    <div class="f r" data-d="3"><div class="ic">🎓</div><h4>Маткапитал «под ключ»</h4><p>Разносит маткапитал и собственные средства, считает день-точные сроки платежей.</p></div>
+    <div class="f r" data-d="4"><div class="ic">🎯</div><h4>Не путает ученика</h4><p>Находит клиента в 1С по ссылке Amo и сверяет ФИО — защита от заказа «не тому».</p></div>
+    <div class="f r" data-d="5"><div class="ic">🛡️</div><h4>Не задваивает и не падает наполовину</h4><p>Защита от дублей, откат при сбое на любом шаге — никаких «полузаказов».</p></div>
+    <div class="f r" data-d="6"><div class="ic">🔒</div><h4>Безопасно по 152-ФЗ</h4><p>Персональные данные не уходят в зарубежные сервисы, всё на российских серверах, журнал каждой операции.</p></div>
+  </div>
+  <div class="cap-extra r"><div class="ce-ic">🔗</div><div class="ce-t"><b>Запись прямо в боевую 1С (УНФ).</b> Система сама создаёт заказы в 1С через прямую интеграцию — не просто готовит документы, а заводит их в учётную систему.<span class="ce-badge">сверх первоначального плана</span></div></div>
+  <div class="feat-foot r">10+ правил расчёта · 4 интегрированные системы · тысячи автопроверок</div>
+</section>
+
+<!-- 4 РЕЗУЛЬТАТЫ -->
+<section class="slide">
+  <div class="eyebrow r">Результаты · первые 2 недели боевого режима (3–16 июня)</div>
+  <h2 class="r" style="margin-bottom:18px">Заработало на реальном потоке</h2>
+  <div class="metrics">
+    <div class="metric r"><div class="num" data-count="793">0</div><div class="lbl">заявок обработано</div></div>
+    <div class="metric r"><div class="num green" data-count="87" data-suffix="%">0</div><div class="lbl">прошли автоматически, без рук</div></div>
+    <div class="metric r"><div class="num green" data-count="97" data-suffix="%">0</div><div class="lbl">обработаны корректно¹</div></div>
+    <div class="metric r"><div class="num" data-count="2.8" data-suffix="%">0</div><div class="lbl">реальные недочёты — дочиняем на ходу</div></div>
+  </div>
+  <p class="note r">¹ 690 оформлено автоматикой + 81 намеренно передано человеку (нетиповые случаи: спец-тарифы, неоднозначные данные — система не угадывает, а отдаёт оператору).</p>
+  <div class="banner r">КП обещал ~95% автоматизации — факт близко к цели уже на старте</div>
+</section>
+
+<!-- 5 БЫЛО/СТАЛО -->
+<section class="slide">
+  <div class="eyebrow r">Как это меняет работу</div>
+  <h2 class="r">От «собрать с нуля» к «проверить и отправить»</h2>
+  <table class="t r">
+    <tr><th>&nbsp;</th><th>Было</th><th>Стало</th></tr>
+    <tr><td>Что делает человек</td><td class="was">собирает договор/счёт с нуля из 1С, Amo, таблиц; считает вручную</td><td class="now">проверяет готовое и отправляет</td></tr>
+    <tr><td>Охват</td><td class="was">0% автоматизации</td><td class="now">87% заявок без рук</td></tr>
+    <tr><td>Расчёт</td><td class="was">«каждый раз изобретают» → ошибки</td><td class="now">единые формулы из прайса</td></tr>
+    <tr><td>Пик сезона</td><td class="was">+2-3 человека найма</td><td class="now">проходим без пропорционального найма</td></tr>
+    <tr><td>Нетиповое</td><td class="was">оператор разбирается сам</td><td class="now">система сама отдаёт с пояснением</td></tr>
+  </table>
+</section>
+
+<!-- 6 СЛОЖНОСТИ -->
+<section class="slide">
+  <div class="eyebrow r">Сложности и чему научились</div>
+  <h2 class="r">Запускались на живом потоке — и это правильно</h2>
+  <ul class="blist">
+    <li class="r"><b>Два канала заявок</b> (форма + таблица) обрабатываются по-разному — выявили и выравниваем на реальных данных.</li>
+    <li class="r"><b>Нюансы документов</b> видны только в бою, не на тестах — ловим по обратной связи операторов.</li>
+    <li class="r"><b>Корректировки под согласованные шаблоны и изменения:</b> правила расчёта уточнялись в процессе (в т.ч. при смене Якимова → Виолетта) — вносим на ходу, без остановки потока.</li>
+    <li class="r"><b>Supervised-режим оправдался</b> — человек в контуре ловит нетиповое, нулевой риск «тихих» ошибок клиенту.</li>
+  </ul>
+  <div class="goal r">Система зрелая — не «сломалось», а «дообкатываем под реальный поток»</div>
+</section>
+
+<!-- 6.7 ПРОПУСКНАЯ СПОСОБНОСТЬ -->
+<section class="slide">
+  <div class="eyebrow r">Пропускная способность · переоформление договоров</div>
+  <h2 class="r">Отдел догнал входящий поток</h2>
+  <table class="t r">
+    <tr><th>На рабочий день</th><th>Май<br><span style="font-weight:400;font-size:.9rem">вручную</span></th><th>Июнь 5–16<br><span style="font-weight:400;font-size:.9rem">с автоматикой</span></th><th>Δ</th></tr>
+    <tr><td>Приходит заявок</td><td>68</td><td>91</td><td class="now">+33%</td></tr>
+    <tr><td>Закрывается (обработано)</td><td>61</td><td>90</td><td class="now">+48%</td></tr>
+    <tr class="total"><td>Баланс (закрыто − пришло)</td><td class="was">−8 /день<br><span style="font-weight:400;font-size:.85rem">очередь растёт</span></td><td class="now">−1 /день<br><span style="font-weight:400;font-size:.85rem">≈ успеваем</span></td><td>очередь остановилась</td></tr>
+  </table>
+  <div class="banner r" style="margin-top:24px">+48% обработки тем же составом · отдел сравнялся с притоком — очередь перестала расти</div>
+</section>
+
+<!-- 6.5 БЛИЖАЙШИЕ ШАГИ -->
+<section class="slide">
+  <div class="eyebrow r">Ближайшие шаги</div>
+  <h2 class="r">Довести шаг 1 до полной мощности</h2>
+  <div class="feat">
+    <div class="f r" data-d="1"><div class="ic">1</div><h4>Внести все доработки</h4><p>Дочинить правки, найденные на живом потоке.</p></div>
+    <div class="f r" data-d="2"><div class="ic">2</div><h4>Нагнать очередь</h4><p>Разгрести накопленное, выйти на режим день-в-день.</p></div>
+    <div class="f r" data-d="3"><div class="ic">3</div><h4>Начать считать SLA</h4><p>Целевое время и качество обработки — измеряем.</p></div>
+    <div class="f r" data-d="4"><div class="ic">4</div><h4>Дашборд с аналитикой</h4><p>Оперативные данные для руководителей — закрывает «нет аналитики».</p></div>
+    <div class="f r" data-d="5"><div class="ic">5</div><h4>Снижать ручной контроль</h4><p>От проверки каждой заявки к выборочной — по мере накопления доверия.</p></div>
+    <div class="f r" data-d="6"><div class="ic">6</div><h4>Продолжать собирать обратную связь</h4><p>Фидбэк операторов → управляемая дообкатка системы.</p></div>
+    <div class="f r" data-d="6"><div class="ic">7</div><h4>Унифицировать формат обработки</h4><p>Единый стандарт работы у всех операторов — меньше разнобоя, быстрее ввод новых сотрудников.</p></div>
+  </div>
+</section>
+
+<!-- 7 РОАДМАП -->
+<section class="slide">
+  <div class="eyebrow r">Куда дальше</div>
+  <h2 class="r">Каждый следующий шаг переиспользует уже построенную инфраструктуру</h2>
+  <table class="t r">
+    <tr><th>Шаг</th><th>Направление</th><th>&nbsp;</th></tr>
+    <tr class="done"><td>✅ 1</td><td>Оформление договоров текущих клиентов</td><td><span class="tag">готово</span></td></tr>
+    <tr><td>2</td><td>Оформление договоров новых клиентов</td><td></td></tr>
+    <tr><td>3</td><td>Дополнительные курсы и услуги</td><td></td></tr>
+    <tr class="done"><td>✅ 4</td><td>Материнский капитал (маткапитал + собственные средства, графики платежей)</td><td><span class="tag">готово</span></td></tr>
+    <tr><td>5</td><td>Корректировки и изменения в договорах</td><td></td></tr>
+    <tr><td>6</td><td>Отказы и возвраты</td><td></td></tr>
+    <tr><td>7</td><td>Точечные счета и оплаты</td><td></td></tr>
+    <tr><td>8</td><td>Работа с должниками</td><td></td></tr>
+    <tr><td>9</td><td>Разнесение оплат</td><td></td></tr>
+  </table>
+</section>
+
+<!-- 8 ЭКОНОМИКА -->
+<section class="slide">
+  <div class="eyebrow r">Экономика развития</div>
+  <h2 class="r">Главная инвестиция уже сделана — в шаге 1</h2>
+  <p class="note r" style="font-size:1.2rem;margin-bottom:24px">Интеграции, сервер, мониторинг, шаблоны построены. Дальше меняется только бизнес-логика → каждый следующий шаг <b>дешевле и быстрее</b>.</p>
+  <div class="econ">
+    <div class="box r"><div class="v">~11-13М ₽</div><div class="k">потенциальная экономия в год (все направления)</div></div>
+    <div class="box r"><div class="v">700-1000%</div><div class="k">ROI проекта</div></div>
+    <div class="box r"><div class="v">18 → 3-5</div><div class="k">целевой состав отдела</div></div>
+  </div>
+  <div class="goal r">Руководитель управляет системой, а не разгребает ручной хаос — роль усиливается</div>
+</section>
+
+<!-- 9 NEXT -->
+<section class="slide">
+  <div class="eyebrow r">Следующий шаг</div>
+  <h2 class="r">Рекомендуем — по приоритету</h2>
+  <div class="rec">
+    <div class="row r"><div class="h">Новые клиенты</div><div class="d">оформление договоров новых клиентов (пик с мая)</div><div class="p">~250К ₽<br><span style="font-size:1rem;font-weight:600;color:var(--text-muted)">2-3 недели</span></div></div>
+    <div class="row r"><div class="h">Оставшиеся тарифы</div><div class="d">добить непокрытые тарифы в текущем периметре («Без учителя» — ~1.7 заявки/день уходят руками)</div><div class="p">~200К ₽<br><span style="font-size:1rem;font-weight:600;color:var(--text-muted)">2-3 недели</span></div></div>
+  </div>
+  <p class="ask r"><b>Что нужно от вас:</b> решение о продолжении и приоритете направлений. Контакт по процессу — Виолетта (как по шагу 1).</p>
+  <p class="note r" style="margin-top:28px">Наиль Мардамшин · Forge — AI-автоматизация · @nmardamshin</p>
+</section>
+
+</div>
+
+<div class="nav">
+  <button class="arrow" id="prev">‹</button>
+  <div class="dots" id="dots"></div>
+  <button class="arrow" id="next">›</button>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+const dotsBox=document.getElementById('dots');
+const prog=document.getElementById('prog');
+const cnt=document.getElementById('cnt');
+let i=0;
+slides.forEach((_,k)=>{const d=document.createElement('div');d.className='dot'+(k===0?' on':'');d.onclick=()=>go(k);dotsBox.appendChild(d)});
+const dots=[...document.querySelectorAll('.dot')];
+
+function animateCounters(slide){
+  slide.querySelectorAll('[data-count]').forEach(el=>{
+    const target=parseFloat(el.dataset.count), suf=el.dataset.suffix||'';
+    const dec=target%1!==0?1:0; let cur=0; const steps=45; const inc=target/steps; let n=0;
+    el.textContent='0'+suf;
+    const t=setInterval(()=>{n++;cur+=inc;if(n>=steps){cur=target;clearInterval(t);}
+      el.textContent=(dec?cur.toFixed(1):Math.round(cur))+suf;},22);
+  });
+}
+function go(n){
+  if(n<0||n>=slides.length)return;
+  slides[i].classList.remove('active');
+  slides[i].classList.toggle('prev',n>i);
+  i=n;
+  slides[i].classList.remove('prev');
+  slides[i].classList.add('active');
+  dots.forEach((d,k)=>d.classList.toggle('on',k===i));
+  prog.style.width=((i+1)/slides.length*100)+'%';
+  cnt.textContent=(i+1)+' / '+slides.length;
+  cnt.style.color=slides[i].classList.contains('hero')?'#fff':'var(--purple-deep)';
+  if(slides[i].querySelector('[data-count]'))setTimeout(()=>animateCounters(slides[i]),350);
+}
+document.getElementById('next').onclick=()=>go(i+1);
+document.getElementById('prev').onclick=()=>go(i-1);
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown')go(i+1);
+  if(e.key==='ArrowLeft'||e.key==='PageUp')go(i-1);
+});
+// график приток/закрытие по рабочим дням май→июнь
+(function(){
+  const data=[
+    ["4.05",19,19],["5.05",31,28],["6.05",22,23],["7.05",37,27],["8.05",21,28],
+    ["12.05",39,31],["13.05",44,39],["14.05",57,54],["15.05",61,67],
+    ["18.05",107,84],["19.05",98,85],["20.05",95,98],["21.05",80,93],["22.05",64,64],
+    ["25.05",113,105],["26.05",86,79],["27.05",85,75],["28.05",90,59],["29.05",150,93],
+    ["1.06",137,51],["2.06",120,84],["3.06",93,64],["4.06",74,64],["5.06",83,116],
+    ["8.06",110,101],["9.06",71,80],["10.06",92,105],["11.06",76,72],
+    ["15.06",126,69],["16.06",80,86]
+  ];
+  const el=document.getElementById('flowchart'); if(!el)return;
+  const W=1000,H=420,pl=44,pr=16,pt=18,pb=46;
+  const n=data.length, maxY=160;
+  const x=i=>pl+(W-pl-pr)*i/(n-1);
+  const y=v=>pt+(H-pt-pb)*(1-v/maxY);
+  const path=k=>data.map((d,i)=>(i?'L':'M')+x(i).toFixed(1)+' '+y(d[k]).toFixed(1)).join(' ');
+  // cutover между 2.06(idx18) и 3.06(idx19)
+  const cutX=(x(18)+x(19))/2;
+  let g='';
+  for(let v=0;v<=160;v+=40){g+=`<line class="grid" x1="${pl}" y1="${y(v)}" x2="${W-pr}" y2="${y(v)}"/><text class="axis" x="${pl-8}" y="${y(v)+4}" text-anchor="end">${v}</text>`;}
+  // x-подписи: каждый 3-й
+  data.forEach((d,i)=>{if(i%3===0||i===n-1)g+=`<text class="axis" x="${x(i)}" y="${H-pb+20}" text-anchor="middle">${d[0]}</text>`;});
+  g+=`<line class="cut" x1="${cutX}" y1="${pt}" x2="${cutX}" y2="${H-pb}"/><text class="cutlbl" x="${cutX+6}" y="${pt+14}">автоматика →</text>`;
+  g+=`<path class="ln" d="${path(1)}" stroke="${getComputedStyle(document.documentElement).getPropertyValue('--purple-deep')}"/>`;
+  g+=`<path class="ln" d="${path(2)}" stroke="${getComputedStyle(document.documentElement).getPropertyValue('--green-accent')}"/>`;
+  data.forEach((d,i)=>{g+=`<circle class="dot" cx="${x(i)}" cy="${y(d[1])}" r="3.5" fill="#520484"/><circle class="dot" cx="${x(i)}" cy="${y(d[2])}" r="3.5" fill="#4bc795"/>`;});
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">${g}</svg>`;
+})();
+// типограф: висячие предлоги (короткие слова ≤3 букв клеим к следующему) + неразрывные дефисы в числах
+(function(){
+  const walk=document.createTreeWalker(document.querySelector('.deck'),NodeFilter.SHOW_TEXT);
+  const nodes=[];let n;while(n=walk.nextNode())nodes.push(n);
+  nodes.forEach(t=>{
+    if(t.parentElement&&['SCRIPT','STYLE'].includes(t.parentElement.tagName))return;
+    let v=t.nodeValue;
+    v=v.replace(/(^|[ \t(])([A-Za-zА-Яа-яЁё&]{1,3}) +/g,"$1$2\u00A0");
+    v=v.replace(/(\d) *- *(\d)/g,"$1\u2011$2");
+    t.nodeValue=v;
+  });
+})();
+prog.style.width=(1/slides.length*100)+'%';
+cnt.textContent='1 / '+slides.length;
+</script>
+</body>
+</html>
